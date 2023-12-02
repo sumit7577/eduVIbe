@@ -14,15 +14,14 @@ import { testimonialData } from "./testimonialData";
 const Testimonial = () => {
   return (
     <>
-      <section>
-        <div className="mx-auto max-w-c-1315 px-4 md:px-8 xl:px-0">
+      <section className="bg-hero">
+        <div className="mx-auto max-w-c-1315 px-4 md:px-8 xl:px-0 pt-24">
           {/* <!-- Section Title Start --> */}
           <div className="animate_top mx-auto text-center">
             <SectionHeader
               headerInfo={{
                 title: `TESTIMONIALS`,
-                subtitle: `Client’s Testimonials`,
-                description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. In convallis tortor eros. Donec vitae tortor lacus. Phasellus aliquam ante in maximus.`,
+                subtitle: `What Our Student Says`
               }}
             />
           </div>
@@ -52,7 +51,7 @@ const Testimonial = () => {
             {/* <!-- Additional required wrapper --> */}
             <Swiper
               spaceBetween={50}
-              slidesPerView={2}
+              slidesPerView={1}
               autoplay={{
                 delay: 2500,
                 disableOnInteraction: false,
@@ -68,7 +67,7 @@ const Testimonial = () => {
                 },
                 // when window width is >= 768px
                 768: {
-                  slidesPerView: 2,
+                  slidesPerView: 1,
                 },
               }}
             >

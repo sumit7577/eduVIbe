@@ -1,10 +1,12 @@
 "use client";
 import React from "react";
 import featuresData from "./featuresData";
-import SingleFeature from "./SingleFeature";
+import SingleCourse from "./SingleCourse";
 import SectionHeader from "../Common/SectionHeader";
+import Link from "next/link";
+import { HeroIcon } from "../Icon";
 
-const Feature = () => {
+const Courses = () => {
   return (
     <>
       {/* <!-- ===== Features Start ===== --> */}
@@ -23,9 +25,20 @@ const Feature = () => {
             {/* <!-- Features item Start --> */}
 
             {featuresData.map((feature, key) => (
-              <SingleFeature feature={feature} key={key} />
+              <SingleCourse feature={feature} key={key} />
             ))}
             {/* <!-- Features item End --> */}
+          </div>
+
+          <div className="flex flex-col items-center my-8">
+            <Link
+              href="#"
+              className="flex items-center justify-center rounded-md bg-primary p-4 px-6 text-lg text-white font-semibold font-sans my-3 max-w-1/3 hover:bg-black"
+            >
+              View All Courses
+              <HeroIcon iconName="ArrowRightIcon" className="h-4 w-4 ml-1" solid />
+
+            </Link>
           </div>
         </div>
       </section>
@@ -35,4 +48,4 @@ const Feature = () => {
   );
 };
 
-export default Feature;
+export default Courses;

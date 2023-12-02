@@ -1,17 +1,13 @@
 import { Metadata } from "next";
 import Hero from "@/components/Hero";
 import Categories from "@/components/Catgories";
-import Feature from "@/components/Features";
+import Courses from "@/components/Courses";
 import About from "@/components/About";
-import FeaturesTab from "@/components/FeaturesTab";
-import FunFact from "@/components/FunFact";
-import Integration from "@/components/Integration";
-import CTA from "@/components/CTA";
-import FAQ from "@/components/FAQ";
-import Pricing from "@/components/Pricing";
+import Teams from "@/components/Teams";
 import Contact from "@/components/Contact";
 import Blog from "@/components/Blog";
 import Testimonial from "@/components/Testimonial";
+import Integration from "@/components/Integration";
 
 export const metadata: Metadata = {
   title: "Majoring Edutech",
@@ -25,14 +21,10 @@ export default function Home() {
       <Hero />
       <About />
       <Categories />
-      <Feature />
-      <FeaturesTab />
-      <FunFact />
-      <Integration />
-      <CTA />
-      <FAQ />
+      <Courses />
       <Testimonial />
-      <Pricing />
+      <Teams/>
+      <Integration />
       <Contact />
       <Blog />
     </main>
