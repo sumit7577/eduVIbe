@@ -3,13 +3,14 @@ import { Blog } from "@/types/blog";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
+import { HeroIcon } from "../Icon";
 
 const BlogItem = ({ blog }: { blog: Blog }) => {
   const { mainImage, title, metadata } = blog;
 
   return (
     <>
-      <motion.div
+      <motion.a
         variants={{
           hidden: {
             opacity: 0,
@@ -21,25 +22,39 @@ const BlogItem = ({ blog }: { blog: Blog }) => {
             y: 0,
           },
         }}
+        href="#"
         initial="hidden"
         whileInView="visible"
         transition={{ duration: 1, delay: 0.5 }}
         viewport={{ once: true }}
-        className="animate_top rounded-lg bg-white p-4 pb-9 shadow-solid-8 dark:bg-blacksection"
+        className="animate_top rounded-lg bg-white p-6 pb-9 shadow-solid-8 dark:bg-blacksection max-w-[90%]"
       >
-        <Link href={`/blog/`} className="relative block aspect-[368/239]">
-          <Image src={mainImage} alt={title} fill />
-        </Link>
-
         <div className="px-4">
-          <h3 className="mb-3.5 mt-7.5 line-clamp-2 inline-block text-lg font-medium text-black duration-300 hover:text-primary dark:text-white dark:hover:text-primary xl:text-itemtitle2">
+          <h3 className="mb-2 mt-2 line-clamp-2 inline-block text-md text-primary dark:text-white font-bold font-sans">
             <Link href={`/blog/blog-details`}>
-              {`${title.slice(0, 40)}...`}
+              {title}
             </Link>
           </h3>
-          <p className="line-clamp-3">{metadata}</p>
+          <p className="line-clamp-3 text-3xl text-black dark:text-white font-bold font-sans">{metadata}</p>
+          <div className="flex justify-between py-6">
+            <div className="flex items-center gap-2">
+              <HeroIcon iconName='CalendarIcon' className="h-5 w-5" />
+              <p className="text-sm">
+                {new Date().toLocaleDateString("en-Us", { day: "2-digit", month: "short", year: "numeric" })}
+              </p>
+            </div>
+            <div className="flex items-center gap-2">
+              <HeroIcon iconName='UserIcon' className="h-5 w-5" />
+              <p className="text-sm">
+                Posted By <span className="text-primary">Janet Flaming</span>
+              </p>
+            </div>
+          </div>
         </div>
-      </motion.div>
+        <Link href={`/blog/`} className="relative block aspect-[368/239] overflow-hidden">
+          <Image src={mainImage} alt={title} fill className="hover:scale-110 ease-in duration-300" />
+        </Link>
+      </motion.a>
     </>
   );
 };
