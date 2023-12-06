@@ -3,8 +3,11 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { HeroIcon } from "../Icon";
+import { useQuery } from "react-query";
+import { getAbout } from "@/networking/controller";
 
 const About = () => {
+  const { data, isLoading } = useQuery("about", getAbout);
   return (
     <>
       {/* <!-- ===== About Start ===== --> */}
@@ -30,7 +33,7 @@ const About = () => {
               className="animate_left relative mx-auto hidden aspect-[588/526.5] md:block md:w-1/2"
             >
               <Image
-                src="/images/about/about-light-01.png"
+                src={data && data[0].image || "/images/about/about-light-01.png"}
                 alt="About"
                 className="dark:hidden"
                 fill
@@ -61,13 +64,13 @@ const About = () => {
               className="animate_right md:w-1/2"
             >
               <span className="font-semibold uppercase dark:text-white font-sans text-primary">
-                About us
+                {data && data[0].title}
               </span>
               <h2 className="relative mb-6 text-4xl font-bold text-black dark:text-white font-sans">
-                Creating A Community Of Life Long Learners
+                {data && data[0].title2}
               </h2>
               <p className="text-md font-sans text-gray-700">
-                Online learning has become increasingly popular in recent years, offering a flexible and convenient way for individuals to pursue education and training.
+                {data && data[0].description}
               </p>
 
               <div className="mt-7.5 flex items-center gap-5">

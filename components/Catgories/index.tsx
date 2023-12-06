@@ -4,8 +4,11 @@ import SingleBrand from "./SingleBrand";
 import brandData from "./catData";
 import Link from "next/link";
 import { HeroIcon } from "../Icon";
+import { useQuery } from "react-query";
+import { getCategory } from "@/networking/controller";
 
 const Brands = () => {
+  const { data, isLoading } = useQuery("categorie", getCategory)
   return (
     <>
       {/* <!-- ===== Clients Start ===== --> */}
@@ -20,7 +23,7 @@ const Brands = () => {
             </p>
           </div>
           <div className="flex flex-wrap justify-between items-center px-30">
-            {brandData.map((brand, key) => (
+            {data && data.map((brand, key) => (
               <SingleBrand brand={brand} key={key} />
             ))}
           </div>

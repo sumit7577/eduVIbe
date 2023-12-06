@@ -2,9 +2,10 @@ import React, { useRef, useEffect } from "react";
 import Image from "next/image";
 import { Brand } from "@/types/brand";
 import { motion } from "framer-motion";
+import { CategoryRespType } from "@/networking/types";
 
-const SingleBrand = ({ brand }: { brand: Brand }) => {
-  const { image, href, name, imageLight, id } = brand;
+const SingleBrand = ({ brand }: { brand: CategoryRespType }) => {
+  const { image, header, title, description, id } = brand;
 
   return (
     <>
@@ -31,14 +32,14 @@ const SingleBrand = ({ brand }: { brand: Brand }) => {
           <Image
             className="opacity-65 transition-all duration-300 hover:opacity-100 dark:hidden h-full max-w-full"
             src={image}
-            alt={name}
+            alt={title}
             height={400}
             width={400}
           />
           <Image
             className="hidden opacity-50 transition-all duration-300 hover:opacity-100 dark:block"
-            src={imageLight}
-            alt={name}
+            src={image}
+            alt={title}
             fill
           />
         </div>
@@ -47,10 +48,10 @@ const SingleBrand = ({ brand }: { brand: Brand }) => {
             5 Courses
           </p>
           <h2 className="text-lg text-black font-semibold font-sans">
-            Business Analysis
+            {title}
           </h2>
           <p className="text-md text-gray-800 font-sans text-center">
-            The course covers the tools used in business analysis.
+            {description}
           </p>
         </div>
 

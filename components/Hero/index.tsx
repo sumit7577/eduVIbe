@@ -7,7 +7,7 @@ import { getHero } from "@/networking/controller";
 
 const Hero = () => {
   const { data, isLoading, isError } = useQuery("hero", getHero)
-  if(!data){
+  if(data && data.length < 1){
     return <h2>No data found!</h2>
   }
   return (
@@ -17,19 +17,13 @@ const Hero = () => {
           <div className="md:grid md:grid-cols-2 sm:grid-rows-1 lg:items-center lg:gap-8 xl:gap-32.5">
             <div className="ml-15">
               <h4 className="mb-4.5 text-base font-bold uppercase text-primary tracking-wide font-sans">
-                Excellence in Education
+                {data && data[0].title}
               </h4>
               <h1 className="mb-5 text-7xl font-bold text-black dark:text-white font-sans">
-                Start Better
-              </h1>
-              <h1 className="mb-5 text-7xl font-bold text-black dark:text-white font-sans">
-                Learning Future
-              </h1>
-              <h1 className="mb-5 text-7xl font-bold text-black dark:text-white font-sans">
-                From Here
+                {data && data[0].title2}
               </h1>
               <p className="text-lg font-medium font-sans border-l-2 p-2 border-primary">
-                Empower yourself with the knowledge and skills gained through online education! The key to your future!
+                {data && data[0].description}
               </p>
 
               <Link
