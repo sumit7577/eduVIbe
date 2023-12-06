@@ -1,16 +1,15 @@
 "use client";
 import Image from "next/image";
-import { useState } from "react";
 import { HeroIcon } from "../Icon";
 import Link from "next/link";
+import { useQuery } from "react-query";
+import { getHero } from "@/networking/controller";
 
 const Hero = () => {
-  const [email, setEmail] = useState("");
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-  };
-
+  const { data, isLoading, isError } = useQuery("hero", getHero)
+  if(!data){
+    return <h2>No data found!</h2>
+  }
   return (
     <>
       <section className="overflow-hidden pb-20 pt-35 md:pt-40 xl:pb-25 xl:pt-46 bg-hero">
