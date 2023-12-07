@@ -1,7 +1,7 @@
 import Axios from "axios";
 import { AuthenticationError, ClientError, NetworkError, ServerError } from "./error";
 
-const BASE_URL = "http://13.233.106.110"
+const BASE_URL = "https://api.majoringlearn.com/"
 
 const apiClient = Axios.create({
     headers: {
