@@ -1,75 +1,29 @@
-const HeroResponse = {
-    "id": {
-        "type": 1,
-        "required": false,
-        "read_only": true,
-        "label": "ID"
-    },
-    "title": {
-        "type": "string",
-        "required": true,
-        "read_only": false,
-        "label": "Title",
-        "max_length": 50
-    },
-    "title2": {
-        "type": "string",
-        "required": true,
-        "read_only": false,
-        "label": "Title2",
-        "max_length": 100
-    },
-    "description": {
-        "type": "string",
-        "required": false,
-        "read_only": false,
-        "label": "Description"
-    },
-    "other_image": {
-        "type": "image upload",
-        "required": false,
-        "read_only": false,
-        "label": "Other image",
-        "max_length": 100
-    },
-    "meet_link": {
-        "type": "string",
-        "required": false,
-        "read_only": false,
-        "label": "Meet link",
-        "max_length": 250
-    },
-    "meet_name": {
-        "type": "string",
-        "required": true,
-        "read_only": false,
-        "label": "Meet name",
-        "max_length": 50
-    },
-    "meet_image": {
-        "type": "image upload",
-        "required": false,
-        "read_only": false,
-        "label": "Meet image",
-        "max_length": 100
-    },
-    "meet_time": {
-        "type": "datetime",
-        "required": false,
-        "read_only": false,
-        "label": "Meet time"
-    },
-    "featured_course": {
-        "type": 1,
-        "required": false,
-        "read_only": false,
-        "label": "Featured course"
-    }
+export const sectionResponse = {
+    "id": 1,
+    "title": "chapter test 1",
+    "title2": "start from here",
+    "description": "learn html,css js",
+    "icon": "",
+    "image": "",
+    "locked": false,
+    "duration": "00:01:40"
 }
 
-type HeroType = typeof HeroResponse;
-export type HeroRespType = {
-    [key in keyof HeroType]: HeroType[key]["type"]
+const userResponse = {
+    "id": 1,
+    "password": "passwd",
+    "last_login": "2023-12-06T14:24:22.780529Z",
+    "is_superuser": true,
+    "username": "admin",
+    "first_name": "",
+    "last_name": "",
+    "email": "admin@gmail.com",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2023-12-06T09:41:06.565097Z",
+    "role": "",
+    "groups": Array<String>,
+    "user_permissions": Array<String>
 }
 
 const AboutUsResponse = {
@@ -107,7 +61,7 @@ const AboutUsResponse = {
         "max_length": 100
     },
     "sections": {
-        "type": 1,
+        "type": [sectionResponse],
         "required": true,
         "read_only": false,
         "label": "Sections"
@@ -115,9 +69,10 @@ const AboutUsResponse = {
 }
 
 type AboutUsType = typeof AboutUsResponse;
+
 export type AboutUsRespType = {
     [key in keyof AboutUsType]: AboutUsType[key]["type"]
-}
+} & { "sections": Array<typeof sectionResponse> }
 
 const CategoryResponse = {
     "id": {
@@ -212,13 +167,13 @@ const CourseResponse = {
         "label": "Duration"
     },
     "user": {
-        "type": "field",
+        "type": [userResponse],
         "required": true,
         "read_only": false,
         "label": "User"
     },
     "lessons": {
-        "type": 1,
+        "type": [sectionResponse],
         "required": true,
         "read_only": false,
         "label": "Lessons"
@@ -252,7 +207,7 @@ const TestimonialResponse = {
         "max_length": 100
     },
     "sections": {
-        "type": 1,
+        "type": [sectionResponse],
         "required": true,
         "read_only": false,
         "label": "Sections"
@@ -313,7 +268,7 @@ const CoreResponse = {
         "max_length": 200
     },
     "sections": {
-        "type": 1,
+        "type": [sectionResponse],
         "required": true,
         "read_only": false,
         "label": "Sections"
@@ -359,7 +314,7 @@ const BlogResponse = {
         "label": "Date"
     },
     "user": {
-        "type": 1,
+        "type": userResponse,
         "required": true,
         "read_only": false,
         "label": "User"
@@ -370,3 +325,78 @@ type BlogType = typeof BlogResponse;
 export type BlogRespType = {
     [key in keyof BlogType]: BlogType[key]["type"]
 }
+
+
+const HeroResponse = {
+    "id": {
+        "type": 1,
+        "required": false,
+        "read_only": true,
+        "label": "ID"
+    },
+    "title": {
+        "type": "string",
+        "required": true,
+        "read_only": false,
+        "label": "Title",
+        "max_length": 50
+    },
+    "title2": {
+        "type": "string",
+        "required": true,
+        "read_only": false,
+        "label": "Title2",
+        "max_length": 100
+    },
+    "description": {
+        "type": "string",
+        "required": false,
+        "read_only": false,
+        "label": "Description"
+    },
+    "other_image": {
+        "type": "image upload",
+        "required": false,
+        "read_only": false,
+        "label": "Other image",
+        "max_length": 100
+    },
+    "meet_link": {
+        "type": "string",
+        "required": false,
+        "read_only": false,
+        "label": "Meet link",
+        "max_length": 250
+    },
+    "meet_name": {
+        "type": "string",
+        "required": true,
+        "read_only": false,
+        "label": "Meet name",
+        "max_length": 50
+    },
+    "meet_image": {
+        "type": "image upload",
+        "required": false,
+        "read_only": false,
+        "label": "Meet image",
+        "max_length": 100
+    },
+    "meet_time": {
+        "type": "datetime",
+        "required": false,
+        "read_only": false,
+        "label": "Meet time"
+    },
+    "featured_course": {
+        "type": CourseResponse,
+        "required": false,
+        "read_only": false,
+        "label": "Featured course"
+    }
+}
+
+type HeroType = typeof HeroResponse;
+export type HeroRespType = {
+    [key in keyof HeroType]: HeroType[key]["type"]
+} & { "featured_course": CourseRespType }
