@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   // other metadata
 };
 
-const BlogPage = async () => {
+const CoursePage = async () => {
   return (
     <>
       {/* <!-- ===== Blog Grid Start ===== --> */}
@@ -26,4 +26,4 @@ const BlogPage = async () => {
   );
 };
 
-export default BlogPage;
+export default CoursePage;

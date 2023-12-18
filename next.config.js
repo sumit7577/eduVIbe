@@ -7,8 +7,8 @@ const nextConfig = {
       domains: ["localhost"],
       remotePatterns: [
         {
-          protocol: "http",
-          hostname: "13.233.106.110",
+          protocol: "https",
+          hostname: "api.majoringlearn.com",
           port: "",
         },
       ],
