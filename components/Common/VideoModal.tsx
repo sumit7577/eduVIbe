@@ -1,11 +1,10 @@
 "use client"
 
-
-import { Dialog, Transition } from '@headlessui/react'
 import type { StaticImageData } from 'next/image'
 import { useState, useRef, Fragment } from 'react'
 import Image from 'next/image'
 import { HeroIcon } from '../Icon'
+import { Dialog, Transition } from '@headlessui/react'
 
 
 interface ModalVideoProps {
@@ -18,7 +17,7 @@ interface ModalVideoProps {
     videoHeight: number
 }
 
-const VideoModal = ({
+export default function VideoModal({
     thumb,
     thumbWidth,
     thumbHeight,
@@ -26,7 +25,7 @@ const VideoModal = ({
     video,
     videoWidth,
     videoHeight,
-}: ModalVideoProps) => {
+}: ModalVideoProps) {
     const [modalOpen, setModalOpen] = useState<boolean>(false)
     const videoRef = useRef<HTMLVideoElement>(null)
     return (
@@ -83,5 +82,3 @@ const VideoModal = ({
 
     )
 }
-
-export default VideoModal;

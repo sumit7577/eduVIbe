@@ -24,7 +24,7 @@ const SingleCourse = ({ feature }: { feature: CourseRespType }) => {
         }}
         initial="hidden"
         whileInView="visible"
-        href="#"
+        href={`course/${id}/`}
         transition={{ duration: 0.5 }}
         viewport={{ once: true }}
         className="group animate_top z-40 rounded-lg border cursor-pointer border-white bg-white p-6 max-w-[24rem] shadow-solid-3 transition-all hover:shadow-solid-4 dark:border-strokedark dark:bg-blacksection dark:hover:bg-hoverdark"

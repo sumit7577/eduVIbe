@@ -5,10 +5,11 @@ import SharePost from "@/components/Blog/SharePost";
 import Accordian from "@/components/Common/Accordian";
 import CategoryHeader from "@/components/Common/CategoryHeader";
 import TabCommon from "@/components/Common/Tabs";
-import VideoModal from "@/components/Common/VideoModal";
 import { HeroIcon } from "@/components/Icon";
 import { useSetTab } from "@/utils/hooks/common";
 import Image from "next/image";
+import { Dialog, Transition } from '@headlessui/react'
+import VideoModal from "@/components/Common/VideoModal";
 
 
 const tabSet = ["Overview", "Curriculum", "Instructor", "Reviews"] as const;
@@ -85,7 +86,7 @@ const SingleCoursePage = () => {
 
               <div className="bg-white rounded-md shadow-md p-4">
                 <div>
-                  <VideoModal thumb="/images/blog/blog-01.png" thumbWidth={300} thumbHeight={400} thumbAlt={"video thumbnail"} video={""} videoWidth={400} videoHeight={400} />
+                  <VideoModal thumb="images/blog/blog-01.png" thumbWidth={0} thumbHeight={0} thumbAlt={""} video={""} videoWidth={0} videoHeight={0} />
                 </div>
                 <div className="flex flex-col p-4">
                   <div className="flex justify-between items-center border-b-2 border-stroke py-4 px-2">
