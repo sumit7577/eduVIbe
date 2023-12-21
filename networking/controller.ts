@@ -25,6 +25,12 @@ const getCourse = async (): Promise<Array<CourseRespType>> => {
     return data;
 }
 
+const getSingleCourse = async (id:number|string): Promise<Array<CourseRespType>> => {
+    const response = await apiClient.get(`${BASE_URL}/course/${id}`);
+    const data = await response.data;
+    return data;
+}
+
 const getTestimonial = async (): Promise<Array<TestimonialRespType>> => {
     const response = await apiClient.get(`${BASE_URL}/testimonial/`);
     const data = await response.data;
@@ -45,5 +51,5 @@ const getCore = async (): Promise<Array<CoreRespType>> => {
 
 export {
     getHero, getAbout, getCategory, getCourse, getTestimonial,
-    getBlogs, getCore
+    getBlogs, getCore,getSingleCourse
 }

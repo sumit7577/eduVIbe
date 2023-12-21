@@ -8,7 +8,7 @@ import { Dialog, Transition } from '@headlessui/react'
 
 
 interface ModalVideoProps {
-    thumb: StaticImageData
+    thumb: StaticImageData | string
     thumbWidth: number
     thumbHeight: number
     thumbAlt: string

@@ -1,3 +1,41 @@
+const videoDetails = {
+    "guid": "a68a2904-bec9-48d6-a0fb-26d60ecadb07",
+    "title": "535aea47-3043-4762-b4ab-fc6302b212f2.mp4",
+    "views": 0,
+    "width": 0,
+    "height": 0,
+    "length": 0,
+    "status": 0,
+    "moments": [],
+    "captions": [],
+    "category": "unknown",
+    "chapters": [],
+    "isPublic": false,
+    "metaTags": [],
+    "rotation": null,
+    "framerate": 0,
+    "storageSize": 0,
+    "collectionId": "",
+    "dateUploaded": "2023-12-20T15:05:33.6472095Z",
+    "encodeProgress": 0,
+    "hasMP4Fallback": false,
+    "thumbnailCount": 0,
+    "totalWatchTime": 0,
+    "videoLibraryId": 186666,
+    "averageWatchTime": 0,
+    "thumbnailFileName": "thumbnail.jpg",
+    "transcodingMessages": [],
+    "availableResolutions": null
+}
+
+
+const videoResponse = {
+    "id": 1,
+    "file": "https://api.majoringlearn.com/Files/videos/retrowave-sunset.1920x1080.mp4",
+    "locked": true,
+    "video_information": videoDetails
+}
+
 export const sectionResponse = {
     "id": 1,
     "title": "chapter test 1",
@@ -6,8 +44,10 @@ export const sectionResponse = {
     "icon": "",
     "image": "",
     "locked": false,
-    "duration": "00:01:40"
+    "duration": "00:01:40",
+    "video":[videoResponse]
 }
+
 
 const userResponse = {
     "id": 1,
@@ -67,6 +107,7 @@ const AboutUsResponse = {
         "label": "Sections"
     }
 }
+
 
 type AboutUsType = typeof AboutUsResponse;
 
@@ -166,8 +207,14 @@ const CourseResponse = {
         "read_only": false,
         "label": "Duration"
     },
-    "user": {
+    "students": {
         "type": [userResponse],
+        "required": true,
+        "read_only": false,
+        "label": "User"
+    },
+    "instructor": {
+        "type": userResponse,
         "required": true,
         "read_only": false,
         "label": "User"
@@ -177,7 +224,13 @@ const CourseResponse = {
         "required": true,
         "read_only": false,
         "label": "Lessons"
-    }
+    },
+    "video_details": {
+        "type": videoDetails,
+        "required": false,
+        "read_only": false,
+        "label": "Video details"
+    },
 }
 
 type CourseType = typeof CourseResponse;

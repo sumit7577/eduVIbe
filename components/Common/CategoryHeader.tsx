@@ -46,7 +46,7 @@ const CategoryHeader = ({ headerInfo }: { headerInfo: HeaderInfo }) => {
                     <h2 className="text-metatitle3 font-sans">Home</h2>
                     {path.map((item, index) => (
                         <div className="flex items-center text-center" key={index}>
-                            <h2 className="text-metatitle3 font-sans" key={index}>{item}</h2>
+                            <h2 className="text-metatitle3 font-sans" key={index}>{index === 2 ? subtitle : item}</h2>
                             {index < (path.length - 1) && <HeroIcon iconName='ChevronRightIcon' className="h-4 w-4" solid />}
                         </div>
 
