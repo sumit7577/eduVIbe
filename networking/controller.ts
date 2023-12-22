@@ -25,7 +25,13 @@ const getCourse = async (): Promise<Array<CourseRespType>> => {
     return data;
 }
 
-const getSingleCourse = async (id:number|string): Promise<Array<CourseRespType>> => {
+export interface SingleCourse{
+    paid:boolean,
+    instructur:boolean,
+    data:Array<CourseRespType>
+}
+
+const getSingleCourse = async (id:number|string): Promise<SingleCourse> => {
     const response = await apiClient.get(`${BASE_URL}/course/${id}`);
     const data = await response.data;
     return data;

@@ -56,10 +56,8 @@ const Hero = () => {
                         <p className="text-xs font-sans text-gray-80 font-semibold ">{data[0].featured_course.lessons[0].duration} Hour</p>
                       </div>
                     </div>
-                    <h2 className="text-md font-semibold text-black mb-3">
-                      {data[0].featured_course.title}
-                    </h2>
-                    <p className="text-xs text-gray-80 font-medium font-sans">{data[0].featured_course.description}</p>
+                    <div className="text-md font-semibold text-black mb-3" dangerouslySetInnerHTML={{ __html: data[0].featured_course.overview[0]?.title ?? data[0].featured_course.title }} />
+                    <div className="text-xs text-gray-80 font-medium font-sans" dangerouslySetInnerHTML={{ __html: data[0].featured_course.overview[0]?.description ?? data[0].description }} />
                   </div>
 
                   <div className="rounded-md bg-white p-4 relative flex flex-col h-96 top-15 shadow-md">

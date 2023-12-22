@@ -30,24 +30,24 @@ const Header = () => {
   return (
     <header
       className={`fixed left-0 top-0 z-99999 w-full py-7 ${stickyMenu
-          ? "bg-white !py-4 shadow transition duration-100 dark:bg-black"
-          : ""
+        ? "bg-white !py-4 shadow transition duration-100 dark:bg-black"
+        : ""
         }`}
     >
       <div className="relative mx-auto max-w-c-1390 items-center justify-between px-4 md:px-8 xl:flex 2xl:px-0">
         <div className="flex w-full items-center justify-between xl:w-1/4">
           <a href="/">
             <Image
-              src="/images/logo/logo.jpeg"
+              src="/images/logo/majoring.png"
               alt="logo"
-              width={119.03}
+              width={50}
               height={30}
               className="hidden w-full dark:block"
             />
             <Image
-              src="/images/logo/logo.jpeg"
+              src="/images/logo/majoring.png"
               alt="logo"
-              width={119.03}
+              width={50}
               height={30}
               className="w-full dark:hidden"
             />
@@ -145,8 +145,7 @@ const Header = () => {
           </nav>
 
           <div className="mt-7 flex items-center gap-6 xl:mt-0">
-            <ThemeToggler />
-
+            {/*<ThemeToogler /> */}
             <div className="rounded-md bg-white p-3">
               <HeroIcon iconName="MagnifyingGlassIcon" className="h-5 w-5 text-primary" />
             </div>

@@ -10,7 +10,7 @@ import { useSetTab } from "@/utils/hooks/common";
 import Image from "next/image";
 import VideoModal from "@/components/Common/VideoModal";
 import { useQuery } from "react-query";
-import { getSingleCourse } from "@/networking/controller";
+import { SingleCourse, getSingleCourse } from "@/networking/controller";
 
 
 const tabSet = ["Overview", "Curriculum", "Instructor", "Reviews"] as const;
@@ -20,23 +20,46 @@ interface singleCourse {
   searchParams: {}
 }
 
+const IsPaidPage = (props: { data: SingleCourse }) => {
+  const { data, instructur, paid } = props.data;
+  return (
+    <div className="pb-20 pt-40">
+      <div className="grid grid-cols-1 md:grid-cols-6 gap-4 min-h-[70vh] md:px-10 px-5">
+        <div className="md:col-span-4">
+          <iframe src="https://iframe.mediadelivery.net/play/186666/eb6952db-4b9a-4c87-a927-64f6c5756dfd" loading="lazy" className="border" style={{ width: "100%", border: 0, height: "100%" }} allowFullScreen={true} allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"></iframe>
+        </div>
+        <div className="md:col-span-2 flex flex-col gap-4">
+          <h2 className="rounded-md bg-white p-4 shadow-lg text-black font-semibold font-sans text-md">Course Content</h2>
+          {data[0].lessons.map((item,index)=>(
+            <Accordian lesson={item} key={index}/>
+          ))}
+        </div>
+      </div>
+
+    </div>
+  )
+}
+
 const SingleCoursePage = (props: singleCourse) => {
   const { tab, setTab } = useSetTab<typeof tabSet[number]>(tabSet[0]);
   const id = props.params.id;
   const { data, isError, isLoading } = useQuery("singleCourse", () => getSingleCourse(id));
+  if (data?.paid) {
+    return <IsPaidPage data={data} />
+  }
   return (
     <>
-      {data && data.length > 0 ? <>
+      {data && data.data.length > 0 ? <>
         <section className="pb-20 pt-35 lg:pb-25 lg:pt-45 xl:pb-30 xl:pt-50">
           <div className="mx-auto max-w-full">
             <CategoryHeader headerInfo={{
-              subtitle: data[0].title,
+              subtitle: data.data[0].title,
               description: undefined,
               classname: undefined
             }} />
             <div className="max-w-c-1315 px-4 md:px-8 2xl:px-0 mx-auto">
               <div className="w-full max-h-[50%] mt-15">
-                <Image src={data[0].image ? data[0].image : "/images/hero/hero-light.svg"} alt={"course banner"} height={400} width={400} className="max-h-[35rem] w-full object-cover" />
+                <Image src={data.data[0].image ? data.data[0].image : "/images/hero/hero-light.svg"} alt={"course banner"} height={400} width={400} className="max-h-[35rem] w-full object-cover" />
               </div>
 
               <div className="md:flex justify-between gap-8 md:px-20 sm:px-10">
@@ -44,8 +67,8 @@ const SingleCoursePage = (props: singleCourse) => {
                 <div className="flex flex-col md:basis-[65%]">
                   <div className="flex my-2 mt-4 gap-20 py-4">
                     <div className="flex gap-2 items-center">
-                      <Image src="/images/user/user-01.png" alt={"educator"} height={30} width={30} />
-                      <h2 className="text-md font-semibold text-black font-sans">{data[0].instructor.username}</h2>
+                      <Image src={data.data[0].instructor.image ? data.data[0].instructor.image : "/images/user/user-01.png"} alt={"educator"} height={30} width={30} />
+                      <h2 className="text-md font-semibold text-black font-sans">{data.data[0].instructor.username}</h2>
                     </div>
                     <div className="flex gap-2 items-center">
                       <HeroIcon iconName={'StarIcon'} className="h-5 w-5 text-yellow-500" solid />
@@ -54,21 +77,25 @@ const SingleCoursePage = (props: singleCourse) => {
                   </div>
 
                   <div className="flex flex-col gap-10">
-                    <h2 className="text-sectiontitle2 text-black dark:text-white font-bold font-sans">{data[0].title}</h2>
+                    <h2 className="text-sectiontitle2 text-black dark:text-white font-bold font-sans">{data.data[0].title}</h2>
                     <TabCommon names={tabSet} setTab={setTab} activeTab={tab} />
                   </div>
 
 
                   <div className={`${tab === "Overview" ? "block" : "hidden"}`}>
                     <div className="flex flex-col gap-4">
-                      <h2 className="text-metatitle2 text-black dark:text-white font-semibold font-sans">Course Description</h2>
-                      <p className="text-regular font-normal text-gray-800 font-sans">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis</p>
-                      <p className="text-regular font-normal text-gray-800 font-sans">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis.</p>
+                      {data.data[0].overview.map((item, index) => (
+                        <div className="list-decimal">
+                          <div className="text-metatitle2 text-black dark:text-white font-semibold font-sans" dangerouslySetInnerHTML={{ __html: item.title }} />
+                          <div className="text-regular font-normal text-gray-800 font-sans" dangerouslySetInnerHTML={{ __html: item.description }} />
+                        </div>
+                      ))}
+
                     </div>
                   </div>
 
                   <div className={`${tab === "Curriculum" ? "block" : "hidden"}`}>
-                    {data[0].lessons.map((item, index) => (
+                    {data.data[0].lessons.map((item, index) => (
                       <Accordian lesson={item} key={index} />
                     ))}
                   </div>
@@ -79,11 +106,11 @@ const SingleCoursePage = (props: singleCourse) => {
                     </div>
                     <div>
                       <h2 className="text-metatitle2 font-semibold text-black dark:text-white font-sans">
-                        {data[0].instructor.username}
+                        {data.data[0].instructor.username}
                       </h2>
-                      <h2 className="text-primary font-semibold text-md font-sans">{data[0].instructor.email}</h2>
+                      <h2 className="text-primary font-semibold text-md font-sans">{data.data[0].instructor.email}</h2>
                       <p className="text-md font-sans py-2">
-                        Janet Fleming is an instructor, blogger, and designer living in a suburb of Washington, DC. She has been assigned to aspen ecosystems research and has been involved in several special assignments.
+                        {data.data[0].instructor.about_us}
                       </p>
                     </div>
 
@@ -98,7 +125,7 @@ const SingleCoursePage = (props: singleCourse) => {
                 <div className="bg-white rounded-md shadow-md p-4 md:basis-[30%] md:relative md:bottom-12">
                   <div>
                     {/*<VideoModal thumb="images/blog/blog-01.png" thumbWidth={0} thumbHeight={0} thumbAlt={""} video={""} videoWidth={0} videoHeight={0} />*/}
-                    <Image src={data[0].image ? data[0].image : "/images/blog/blog-01.png"} height={400} width={400} alt="demo video" />
+                    <Image src={data.data[0].image ? data.data[0].image : "/images/blog/blog-01.png"} height={400} width={400} alt="demo video" />
                   </div>
                   <div className="flex flex-col p-4">
                     <div className="flex justify-between items-center border-b-2 border-stroke py-4 px-2">
@@ -106,7 +133,7 @@ const SingleCoursePage = (props: singleCourse) => {
                         <HeroIcon iconName='ClockIcon' className="h-4 w-4 text-primary" />
                         Duration
                       </div>
-                      <h2 className="text-md font-semibold font-sans">{data[0].duration}</h2>
+                      <h2 className="text-md font-semibold font-sans">{data.data[0].duration}</h2>
                     </div>
 
                     <div className="flex justify-between items-center border-b-2 border-stroke py-4 px-2">
@@ -114,7 +141,7 @@ const SingleCoursePage = (props: singleCourse) => {
                         <HeroIcon iconName='UserGroupIcon' className="h-4 w-4 text-primary" />
                         Students
                       </div>
-                      <h2 className="text-md font-semibold font-sans">{data[0].students.length}</h2>
+                      <h2 className="text-md font-semibold font-sans">{data.data[0].students.length}</h2>
                     </div>
 
                     <div className="flex justify-between items-center border-b-2 border-stroke py-4 px-2">
@@ -122,7 +149,7 @@ const SingleCoursePage = (props: singleCourse) => {
                         <HeroIcon iconName="DocumentTextIcon" className="h-4 w-4 text-primary" />
                         Lessons
                       </div>
-                      <h2 className="text-md font-semibold font-sans">{data[0].lessons.length}</h2>
+                      <h2 className="text-md font-semibold font-sans">{data.data[0].lessons.length}</h2>
                     </div>
 
                     <div className="flex justify-between items-center border-b-2 border-stroke py-4 px-2">
@@ -130,13 +157,13 @@ const SingleCoursePage = (props: singleCourse) => {
                         <HeroIcon iconName='UserIcon' className="h-4 w-4 text-primary" />
                         Instructor
                       </div>
-                      <h2 className="text-md font-semibold font-sans">{data[0].instructor.username}</h2>
+                      <h2 className="text-md font-semibold font-sans">{data.data[0].instructor.username}</h2>
                     </div>
                   </div>
 
                   <div className="flex flex-col justify-center text-center gap-4 px-4 py-4">
                     <h2 className="border border-primary bg-stroke rounded-md p-4 text-md font-bold font-sans text-primary">
-                      Price: {parseInt(data[0].price.toString()).toLocaleString("en-US", { style: "currency", currency: "INR" })}
+                      Price: {parseInt(data.data[0].price.toString()).toLocaleString("en-US", { style: "currency", currency: "INR" })}
                     </h2>
                     <h2 className="border-2 bg-primary text-white rounded-md p-4 text-md font-bold font-sans cursor-pointer hover:bg-strokedark">
                       Buy Now

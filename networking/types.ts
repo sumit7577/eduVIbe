@@ -31,6 +31,7 @@ const videoDetails = {
 
 const videoResponse = {
     "id": 1,
+    "title":"",
     "file": "https://api.majoringlearn.com/Files/videos/retrowave-sunset.1920x1080.mp4",
     "locked": true,
     "video_information": videoDetails
@@ -45,7 +46,7 @@ export const sectionResponse = {
     "image": "",
     "locked": false,
     "duration": "00:01:40",
-    "video":[videoResponse]
+    "video": [videoResponse]
 }
 
 
@@ -62,6 +63,8 @@ const userResponse = {
     "is_active": true,
     "date_joined": "2023-12-06T09:41:06.565097Z",
     "role": "",
+    "image": "",
+    "about_us": "",
     "groups": Array<String>,
     "user_permissions": Array<String>
 }
@@ -172,8 +175,8 @@ const CourseResponse = {
         "label": "Title",
         "max_length": 50
     },
-    "description": {
-        "type": "string",
+    "overview": {
+        "type": [sectionResponse],
         "required": false,
         "read_only": false,
         "label": "Description"

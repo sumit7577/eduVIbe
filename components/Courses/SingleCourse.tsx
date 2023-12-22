@@ -6,7 +6,7 @@ import { HeroIcon } from "../Icon";
 import { CourseRespType } from "@/networking/types";
 
 const SingleCourse = ({ feature }: { feature: CourseRespType }) => {
-  const { id, title, description, image, students, instructor, lessons, price, discount_price, duration } = feature;
+  const { id, title, image, students, instructor, lessons, price, discount_price, duration } = feature;
 
   return (
     <>

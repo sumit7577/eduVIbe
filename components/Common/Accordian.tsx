@@ -31,7 +31,7 @@ const Accordian = (props: accordianProps) => {
                             <a href="#" className="flex justify-between">
                                 <div className="flex items-center gap-2">
                                     <HeroIcon iconName='DocumentTextIcon' className="h-4 w-4" />
-                                    <h2 className="text-md font-semibold font-sans">{item.video_information.title}</h2>
+                                    <h2 className="text-md font-semibold font-sans">{item.title}</h2>
                                 </div>
                                 <div className="flex items-center gap-2">
                                     <h2 className="text-white bg-primary rounded-sm p-1 px-3 text-xs font-semibold font-sans">Preview</h2>
