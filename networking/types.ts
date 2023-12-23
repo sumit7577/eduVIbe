@@ -28,14 +28,16 @@ const videoDetails = {
     "availableResolutions": null
 }
 
+export type videoDetailsType = typeof videoDetails;
 
 const videoResponse = {
     "id": 1,
-    "title":"",
+    "title": "",
     "file": "https://api.majoringlearn.com/Files/videos/retrowave-sunset.1920x1080.mp4",
     "locked": true,
     "video_information": videoDetails
 }
+export type videoResponseType = typeof videoResponse;
 
 export const sectionResponse = {
     "id": 1,
@@ -67,6 +69,10 @@ export const userResponse = {
     "about_us": "",
     "groups": Array<String>,
     "user_permissions": Array<String>
+}
+
+export type userResponseType = Omit<typeof userResponse, "image"> & {
+    "image":any
 }
 
 const AboutUsResponse = {

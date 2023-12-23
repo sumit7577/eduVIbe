@@ -1,12 +1,12 @@
 "use client";
-import { userResponse } from "@/networking/types";
+import { userResponse, userResponseType } from "@/networking/types";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import { ChangeEvent, FormEvent, FormEventHandler, useState } from "react";
+import { FormEvent, useState } from "react";
 import Input from "../Core/Input";
 import { useMutation } from "react-query";
-import { loginUser, registerUser } from "@/networking/controller";
+import { registerUser } from "@/networking/controller";
 import { HeroIcon } from "../Icon";
 import Loader from "../Core/loader";
 import toast from "react-hot-toast";
@@ -31,7 +31,7 @@ const Signup = () => {
   }
 
   const registerMutation = useMutation({
-    mutationFn: (input: Partial<typeof userResponse>) => {
+    mutationFn: (input: Partial<userResponseType>) => {
       return registerUser(input)
     },
     onSuccess: (data) => {
@@ -179,7 +179,7 @@ const Signup = () => {
                   type="text"
                   placeholder="Role"
                   value={data.role}
-                  option={["Student","Instructor"]}
+                  option={["Student", "Instructor"]}
                   onSelect={(e) => {
                     setData({ ...data, role: e.target.value })
                   }} />

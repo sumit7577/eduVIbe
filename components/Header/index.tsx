@@ -1,4 +1,5 @@
 "use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -7,12 +8,29 @@ import { HeroIcon } from "../Icon";
 import ThemeToggler from "./ThemeToggler";
 import menuData from "./menuData";
 import { useAuth } from "@/app/context/AuthContext";
+import AppMenu, { MenuData } from "../Core/menu";
+import Modal from "../Common/Modal";
 
 const Header = () => {
   const [navigationOpen, setNavigationOpen] = useState(false);
   const [dropdownToggler, setDropdownToggler] = useState(false);
   const [stickyMenu, setStickyMenu] = useState(false);
-  const { authState, isUserAuthenticated } = useAuth()
+  const { authState, isUserAuthenticated, setAuthState } = useAuth()
+  const [modal, showModal] = useState<boolean>(false)
+
+  const Logout = () => {
+    localStorage.clear()
+    setAuthState({ token: "", user: null })
+    showModal(() => false)
+  }
+
+  const menu: MenuData = [
+    {
+      name: "Logout",
+      icon: 'ArrowRightOnRectangleIcon',
+      onClick: () => { showModal(() => !modal) }
+    }
+  ]
 
   const pathUrl = usePathname();
 
@@ -148,17 +166,13 @@ const Header = () => {
 
           <div className="mt-7 flex items-center gap-6 xl:mt-0">
             {/*<ThemeToogler /> */}
+            <Modal open={modal} setModal={showModal} onSuccess={Logout} title={"Logout?"} description="Are you sure you want to Logout?" />
             <div className="rounded-md bg-white p-3">
               <HeroIcon iconName="MagnifyingGlassIcon" className="h-5 w-5 text-primary" />
             </div>
             {isUserAuthenticated() ?
-              <div className="flex items-center gap-4">
-                <Image src={authState.user?.image ?? "/images/user/user-01.png"} height={40} width={40} alt="user" onError={(element) => {
-                  element.src = "/images/user/user-01.png"
-                }
-                } />
-                <h2 className="text-md font-semibold font-sans text-black">{authState.user?.username}</h2>
-              </div> : <Link
+              <AppMenu item={menu} image title={authState.user?.username} /> :
+              <Link
                 href="/auth/signin"
                 className="flex items-center justify-center rounded-md bg-primary px-5 py-3 text- text-white duration-300 ease-in-out hover:bg-primaryho font-semibold"
               >

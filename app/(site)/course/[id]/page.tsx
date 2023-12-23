@@ -11,6 +11,7 @@ import Image from "next/image";
 import VideoModal from "@/components/Common/VideoModal";
 import { useQuery } from "react-query";
 import { SingleCourse, getSingleCourse } from "@/networking/controller";
+import { useState } from "react";
 
 
 const tabSet = ["Overview", "Curriculum", "Instructor", "Reviews"] as const;
@@ -22,16 +23,20 @@ interface singleCourse {
 
 const IsPaidPage = (props: { data: SingleCourse }) => {
   const { data, instructur, paid } = props.data;
+  const [video, selectedVideo] = useState<string>("")
   return (
     <div className="pb-20 pt-40">
-      <div className="grid grid-cols-1 md:grid-cols-6 gap-4 min-h-[70vh] md:px-10 px-5">
-        <div className="md:col-span-4">
-          <iframe src="https://iframe.mediadelivery.net/play/186666/eb6952db-4b9a-4c87-a927-64f6c5756dfd" loading="lazy" className="border" style={{ width: "100%", border: 0, height: "100%" }} allowFullScreen={true} allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"></iframe>
+      <div className="bg-primary p-4 mb-4 rouned-md">
+        <h2 className="text-white text-lg font-semibold font-sans">{data[0].title}</h2>
+      </div>
+      <div className="grid grid-cols-1 md:grid-cols-6 gap-4 md:px-10 px-5 overflow-auto min-h-[70vh]">
+        <div className="md:col-span-4 bg-black rounded-md shadow-lg sticky max-h-fit">
+          {video !== "" && <iframe src={video} loading="lazy" className="border" style={{ width: "100%", border: 0, height: "100%" }} allowFullScreen={true} allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"></iframe>}
         </div>
-        <div className="md:col-span-2 flex flex-col gap-4">
+        <div className="md:col-span-2 flex flex-col gap-4 overflow-scroll min-h-min">
           <h2 className="rounded-md bg-white p-4 shadow-lg text-black font-semibold font-sans text-md">Course Content</h2>
-          {data[0].lessons.map((item,index)=>(
-            <Accordian lesson={item} key={index}/>
+          {data[0].lessons.map((item, index) => (
+            <Accordian lesson={item} key={index} paid={true} selectedVideo={video} selectVideo={selectedVideo} lessonIndex={index} />
           ))}
         </div>
       </div>
@@ -44,7 +49,7 @@ const SingleCoursePage = (props: singleCourse) => {
   const { tab, setTab } = useSetTab<typeof tabSet[number]>(tabSet[0]);
   const id = props.params.id;
   const { data, isError, isLoading } = useQuery("singleCourse", () => getSingleCourse(id));
-  if (data?.paid) {
+  if (data && !data?.paid) {
     return <IsPaidPage data={data} />
   }
   return (
@@ -124,8 +129,11 @@ const SingleCoursePage = (props: singleCourse) => {
 
                 <div className="bg-white rounded-md shadow-md p-4 md:basis-[30%] md:relative md:bottom-12">
                   <div>
-                    {/*<VideoModal thumb="images/blog/blog-01.png" thumbWidth={0} thumbHeight={0} thumbAlt={""} video={""} videoWidth={0} videoHeight={0} />*/}
-                    <Image src={data.data[0].image ? data.data[0].image : "/images/blog/blog-01.png"} height={400} width={400} alt="demo video" />
+                    {data.data[0].video_details !== null ?
+                      <VideoModal thumb="/images/blog/blog-01.png" thumbWidth={400} thumbHeight={400} thumbAlt={"demo video"} video={data.data[0].video_details} videoWidth={800} videoHeight={800} /> :
+                      <Image src={data.data[0]?.image ?? "/images/blog/blog-01.png"} width={400} height={400} alt="Course Demo" />
+                    }
+
                   </div>
                   <div className="flex flex-col p-4">
                     <div className="flex justify-between items-center border-b-2 border-stroke py-4 px-2">

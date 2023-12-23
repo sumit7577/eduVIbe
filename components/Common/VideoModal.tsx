@@ -1,10 +1,11 @@
 "use client"
 
 import type { StaticImageData } from 'next/image'
-import { useState, useRef, Fragment } from 'react'
+import { useState, useRef, Fragment, useEffect } from 'react'
 import Image from 'next/image'
 import { HeroIcon } from '../Icon'
 import { Dialog, Transition } from '@headlessui/react'
+import { videoDetailsType } from '@/networking/types'
 
 
 interface ModalVideoProps {
@@ -12,7 +13,7 @@ interface ModalVideoProps {
     thumbWidth: number
     thumbHeight: number
     thumbAlt: string
-    video: string
+    video: videoDetailsType
     videoWidth: number
     videoHeight: number
 }
@@ -66,11 +67,11 @@ export default function VideoModal({
                         leaveTo="opacity-0 scale-95"
                     >
                         <div className="max-w-6xl mx-auto h-full flex items-center">
-                            <Dialog.Panel className="w-full max-h-full aspect-video bg-black overflow-hidden">
-                                <video ref={videoRef} width={videoWidth} height={videoHeight} loop controls>
-                                    <source src='https://youtu.be/pNje3bWz7V8' type="video/mp4" />
-                                    Your browser does not support the video tag.
-                                </video>
+                            <Dialog.Panel className="w-[100vh] h-[50%] bg-black overflow-hidden rounded-md shadow-lg">
+                                <div className='relative h-full'>
+                                    <iframe src={`https://iframe.mediadelivery.net/embed/${video.videoLibraryId}/${video.guid}?autoplay=true&loop=false&muted=false&preload=true&responsive=true`} loading="lazy" className='border-none h-full w-full absolute' allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;" allowFullScreen={true}>
+                                    </iframe>
+                                </div>
                             </Dialog.Panel>
                         </div>
                     </Transition.Child>
