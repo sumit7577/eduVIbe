@@ -22,6 +22,7 @@ const inter = Inter({
 });
 
 import ToasterContext from "../context/ToastContext";
+import { AuthProvider } from "../context/AuthContext";
 
 const queryClient = new QueryClient()
 
@@ -34,18 +35,20 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={`dark:bg-black ${inter.variable}`}>
         <QueryClientProvider client={queryClient}>
-          <ThemeProvider
-            enableSystem={false}
-            attribute="class"
-            defaultTheme="light"
-          >
-            <Lines />
-            <Header />
-            <ToasterContext />
-            {children}
-            <Footer />
-            <ScrollToTop />
-          </ThemeProvider>
+          <AuthProvider>
+            <ThemeProvider
+              enableSystem={false}
+              attribute="class"
+              defaultTheme="light"
+            >
+              <Lines />
+              <Header />
+              <ToasterContext />
+              {children}
+              <Footer />
+              <ScrollToTop />
+            </ThemeProvider>
+          </AuthProvider>
         </QueryClientProvider>
       </body>
     </html>

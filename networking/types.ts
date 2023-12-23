@@ -50,7 +50,7 @@ export const sectionResponse = {
 }
 
 
-const userResponse = {
+export const userResponse = {
     "id": 1,
     "password": "passwd",
     "last_login": "2023-12-06T14:24:22.780529Z",

@@ -8,6 +8,7 @@ import Contact from "@/components/Contact";
 import Blog from "@/components/Blog";
 import Testimonial from "@/components/Testimonial";
 import Integration from "@/components/Integration";
+import { useAuth } from "../context/AuthContext";
 
 export const metadata: Metadata = {
   title: "Majoring Edutech",

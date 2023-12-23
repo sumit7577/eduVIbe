@@ -6,11 +6,13 @@ import { useEffect, useState } from "react";
 import { HeroIcon } from "../Icon";
 import ThemeToggler from "./ThemeToggler";
 import menuData from "./menuData";
+import { useAuth } from "@/app/context/AuthContext";
 
 const Header = () => {
   const [navigationOpen, setNavigationOpen] = useState(false);
   const [dropdownToggler, setDropdownToggler] = useState(false);
   const [stickyMenu, setStickyMenu] = useState(false);
+  const { authState, isUserAuthenticated } = useAuth()
 
   const pathUrl = usePathname();
 
@@ -149,14 +151,21 @@ const Header = () => {
             <div className="rounded-md bg-white p-3">
               <HeroIcon iconName="MagnifyingGlassIcon" className="h-5 w-5 text-primary" />
             </div>
+            {isUserAuthenticated() ?
+              <div className="flex items-center gap-4">
+                <Image src={authState.user?.image ?? "/images/user/user-01.png"} height={40} width={40} alt="user" onError={(element) => {
+                  element.src = "/images/user/user-01.png"
+                }
+                } />
+                <h2 className="text-md font-semibold font-sans text-black">{authState.user?.username}</h2>
+              </div> : <Link
+                href="/auth/signin"
+                className="flex items-center justify-center rounded-md bg-primary px-5 py-3 text- text-white duration-300 ease-in-out hover:bg-primaryho font-semibold"
+              >
+                <HeroIcon iconName={"UserIcon"} className="h-5 w-5 mr-1" />
+                Login / Register
+              </Link>}
 
-            <Link
-              href="/auth/signin"
-              className="flex items-center justify-center rounded-md bg-primary px-5 py-3 text- text-white duration-300 ease-in-out hover:bg-primaryho font-semibold"
-            >
-              <HeroIcon iconName={"UserIcon"} className="h-5 w-5 mr-1" />
-              Login / Register
-            </Link>
           </div>
         </div>
       </div>

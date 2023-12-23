@@ -1,13 +1,16 @@
-import Signin from "@/components/Auth/Signin";
-import { Metadata } from "next";
+'use client'
 
-export const metadata: Metadata = {
-  title: "Login Page - Solid SaaS Boilerplate",
-  description: "This is Login page for Startup Pro",
-  // other metadata
-};
+import { useAuth } from "@/app/context/AuthContext";
+import Signin from "@/components/Auth/Signin";
+import { useRouter } from "next/navigation";
+
 
 const SigninPage = () => {
+  const { isUserAuthenticated, authState } = useAuth()
+  const router = useRouter()
+  if (isUserAuthenticated()) {
+    router.push("/")
+  }
   return (
     <>
       <Signin />

@@ -2,6 +2,7 @@ import Axios from "axios";
 import { AuthenticationError, ClientError, NetworkError, ServerError } from "./error";
 
 const BASE_URL = "https://api.majoringlearn.com"
+//const BASE_URL = "http://127.0.0.1:8000"
 
 const apiClient = Axios.create({
     headers: {
@@ -10,6 +11,10 @@ const apiClient = Axios.create({
 })
 
 apiClient.interceptors.request.use(async (request: any) => {
+    const token = localStorage.getItem("token");
+    if (token && token !== "") {
+        request.headers['Authorization'] = `Token ${token}`;
+    }
     return request;
 });
 
@@ -33,7 +38,7 @@ apiClient.interceptors.response.use(
         } else if (error.response.status >= 400 && error.response.status < 500) {
             return Promise.reject(
                 new ClientError(
-                    error.response.data.msg || error.message,
+                    Object.entries(error.response.data).join(" ").replace(","," "),
                     error.response.status
                 )
             );

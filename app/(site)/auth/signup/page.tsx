@@ -1,13 +1,17 @@
-import Signup from "@/components/Auth/Signup";
-import { Metadata } from "next";
+"use client"
 
-export const metadata: Metadata = {
-  title: "Sign Up Page - Solid SaaS Boilerplate",
-  description: "This is Sign Up page for Startup Pro",
-  // other metadata
-};
+import { useAuth } from "@/app/context/AuthContext";
+import Signup from "@/components/Auth/Signup";
+import { useRouter } from "next/navigation";
+
+
 
 export default function Register() {
+  const { isUserAuthenticated } = useAuth()
+  const router = useRouter();
+  if (isUserAuthenticated()) {
+    router.push("/")
+  }
   return (
     <>
       <Signup />

@@ -1,16 +1,54 @@
 "use client";
+import { userResponse } from "@/networking/types";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { ChangeEvent, FormEvent, FormEventHandler, useState } from "react";
+import Input from "../Core/Input";
+import { useMutation } from "react-query";
+import { loginUser, registerUser } from "@/networking/controller";
+import { HeroIcon } from "../Icon";
+import Loader from "../Core/loader";
+import toast from "react-hot-toast";
+import { ClientError } from "@/networking/error";
+import { useRouter } from "next/navigation";
 
 const Signup = () => {
-  const [data, setData] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
+  const router = useRouter()
+  const [data, setData] = useState<Partial<typeof userResponse>>({
+    username: "",
+    role: "Student",
     password: "",
+    about_us: "",
+    email: ""
   });
+
+  const validateData = () => {
+    if (data.username === "" || data.role === "" || data.password === "" || data.email === "") {
+      return false
+    }
+    return true
+  }
+
+  const registerMutation = useMutation({
+    mutationFn: (input: Partial<typeof userResponse>) => {
+      return registerUser(input)
+    },
+    onSuccess: (data) => {
+      toast.success("Registration Successfull!")
+      router.push("/auth/signin")
+    },
+    onError: (data: ClientError) => {
+      toast.error(data?.message || JSON.stringify(data))
+    }
+  })
+
+  const [image, setImage] = useState<File | null>(null);
+
+  const register = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    registerMutation.mutate({ ...data, image: image })
+  }
 
   return (
     <>
@@ -123,52 +161,73 @@ const Signup = () => {
               <span className="dark:bg-stroke-dark hidden h-[1px] w-full max-w-[200px] bg-stroke dark:bg-strokedark sm:block"></span>
             </div>
 
-            <form>
+            <form onSubmit={register}>
               <div className="mb-7.5 flex flex-col gap-7.5 lg:mb-12.5 lg:flex-row lg:justify-between lg:gap-14">
-                <input
-                  name="firstName"
+
+                <Input
+                  name="username"
                   type="text"
-                  placeholder="First name"
-                  value={data.firstName}
-                  onChange={(e) =>
-                    setData({ ...data, [e.target.name]: e.target.value })
-                  }
-                  className="w-full border-b border-stroke bg-transparent pb-3.5 focus:border-waterloo focus:placeholder:text-black focus-visible:outline-none dark:border-strokedark dark:focus:border-manatee dark:focus:placeholder:text-white lg:w-1/2"
+                  placeholder="Username"
+                  value={data.username}
+                  onChange={(e) => {
+                    setData({ ...data, username: e.target.value })
+                  }}
                 />
 
-                <input
-                  name="lastName"
+                <Input selector
+                  name="Role"
                   type="text"
-                  placeholder="Last name"
-                  value={data.lastName}
-                  onChange={(e) =>
-                    setData({ ...data, [e.target.name]: e.target.value })
-                  }
-                  className="w-full border-b border-stroke bg-transparent pb-3.5 focus:border-waterloo focus:placeholder:text-black focus-visible:outline-none dark:border-strokedark dark:focus:border-manatee dark:focus:placeholder:text-white lg:w-1/2"
-                />
+                  placeholder="Role"
+                  value={data.role}
+                  option={["Student","Instructor"]}
+                  onSelect={(e) => {
+                    setData({ ...data, role: e.target.value })
+                  }} />
               </div>
 
               <div className="mb-7.5 flex flex-col gap-7.5 lg:mb-12.5 lg:flex-row lg:justify-between lg:gap-14">
-                <input
+                <Input
                   name="email"
                   type="email"
                   placeholder="Email address"
                   value={data.email}
                   onChange={(e) =>
-                    setData({ ...data, [e.target.name]: e.target.value })
+                    setData({ ...data, email: e.target.value })
                   }
-                  className="w-full border-b border-stroke bg-transparent pb-3.5 focus:border-waterloo focus:placeholder:text-black focus-visible:outline-none dark:border-strokedark dark:focus:border-manatee dark:focus:placeholder:text-white lg:w-1/2"
                 />
 
-                <input
+                <Input
                   name="password"
                   type="password"
                   placeholder="Password"
                   value={data.password}
                   onChange={(e) =>
-                    setData({ ...data, [e.target.name]: e.target.value })
+                    setData({ ...data, password: e.target.value })
                   }
-                  className="w-full border-b border-stroke bg-transparent pb-3.5 focus:border-waterloo focus:placeholder:text-black focus-visible:outline-none dark:border-strokedark dark:focus:border-manatee dark:focus:placeholder:text-white lg:w-1/2"
+                />
+              </div>
+
+              <div className="mb-7.5 flex flex-col gap-7.5 lg:mb-12.5 lg:flex-row lg:justify-between lg:gap-14">
+                <Input
+                  name="about_us"
+                  type='text'
+                  placeholder="About Us"
+                  value={data.about_us}
+                  onChange={(e) =>
+                    setData({ ...data, about_us: e.target.value })
+                  }
+
+                />
+
+                <Input
+                  name='image'
+                  type='file'
+                  placeholder='Profile Picture'
+                  value={data.image}
+                  onChange={(e) =>
+                    setImage(() => e.target.files && e.target.files[0])
+                  }
+                  accept="image/*"
                 />
               </div>
 
@@ -205,23 +264,16 @@ const Signup = () => {
                 </div>
 
                 <button
+                  disabled={validateData() ? false : true}
                   aria-label="signup with email and password"
-                  className="inline-flex items-center gap-2.5 rounded-full bg-black px-6 py-3 font-medium text-white duration-300 ease-in-out hover:bg-blackho dark:bg-btndark dark:hover:bg-blackho"
+                  className={`inline-flex items-center gap-2.5 rounded-full ${validateData() ? "bg-black hover:bg-blackho dark:bg-btndark dark:hover:bg-blackho" : "bg-stroke"} px-6 py-3 font-medium text-white duration-300 ease-in-out`}
                 >
                   Create Account
-                  <svg
-                    className="fill-white"
-                    width="14"
-                    height="14"
-                    viewBox="0 0 14 14"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M10.4767 6.16664L6.00668 1.69664L7.18501 0.518311L13.6667 6.99998L7.18501 13.4816L6.00668 12.3033L10.4767 7.83331H0.333344V6.16664H10.4767Z"
-                      fill=""
-                    />
-                  </svg>
+                  {registerMutation.isLoading ?
+                    <Loader />
+                    : <HeroIcon className="h-5 w-5" iconName="ArrowRightIcon" />
+                  }
+
                 </button>
               </div>
 
