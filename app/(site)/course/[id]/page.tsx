@@ -49,7 +49,7 @@ const SingleCoursePage = (props: singleCourse) => {
   const { tab, setTab } = useSetTab<typeof tabSet[number]>(tabSet[0]);
   const id = props.params.id;
   const { data, isError, isLoading } = useQuery("singleCourse", () => getSingleCourse(id));
-  if (data && !data?.paid) {
+  if (data && data?.paid) {
     return <IsPaidPage data={data} />
   }
   return (
@@ -105,11 +105,11 @@ const SingleCoursePage = (props: singleCourse) => {
                     ))}
                   </div>
 
-                  <div className={`${tab === "Instructor" ? "block" : "hidden"} flex items-center gap-4`}>
-                    <div className="border basis-1/3">
-                      <Image src="/images/blog/blog-01.png" alt={"educator"} height={250} width={200} className="w-[200px] h-[232px] object-cover rounded-md" />
+                  <div className={`${tab === "Instructor" ? "block" : "hidden"} grid md:grid-cols-6 sm:grid-cols-1 gap-4`}>
+                    <div className="border bg-white dark:bg-strokedark rounded-md col-span-2">
+                      <Image src={data.data[0].instructor.image ?? "/images/user/user-01.png"} alt={"educator"} height={200} width={200} className="w-full max-h-full object-cover" />
                     </div>
-                    <div>
+                    <div className="flex flex-col mt-4">
                       <h2 className="text-metatitle2 font-semibold text-black dark:text-white font-sans">
                         {data.data[0].instructor.username}
                       </h2>
@@ -127,7 +127,7 @@ const SingleCoursePage = (props: singleCourse) => {
                 </div>
 
 
-                <div className="bg-white rounded-md shadow-md p-4 md:basis-[30%] md:relative md:bottom-12">
+                <div className="bg-white rounded-md shadow-md p-4 md:basis-[30%] md:relative md:bottom-12 mt-10 md:mt-0">
                   <div>
                     {data.data[0].video_details !== null ?
                       <VideoModal thumb="/images/blog/blog-01.png" thumbWidth={400} thumbHeight={400} thumbAlt={"demo video"} video={data.data[0].video_details} videoWidth={800} videoHeight={800} /> :

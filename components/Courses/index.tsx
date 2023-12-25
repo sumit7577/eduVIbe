@@ -15,7 +15,7 @@ const Courses = () => {
     <>
       {/* <!-- ===== Features Start ===== --> */}
       {data && data.length > 0 ? <>
-        <section id="features" className="py-20 lg:py-25 xl:py-30">
+        <section id="course" className="py-20 lg:py-25 xl:py-30 bg-stroke dark:bg-strokedark">
           <div className="mx-auto max-w-c-1315 px-4 md:px-8 xl:px-0">
             {/* <!-- Section Title Start --> */}
             <SectionHeader

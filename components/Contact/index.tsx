@@ -34,7 +34,7 @@ const Contact = () => {
             />
           </div>
 
-          <div className="flex rounded-md bg-white p-4 items-center gap-2 mx-[25%] max-w-[60%]">
+          <div className="flex rounded-md bg-white p-4 items-center gap-2 md:mx-[25%] md:max-w-[60%]">
 
             <HeroIcon iconName='EnvelopeIcon' className="h-5 w-5" />
             <input

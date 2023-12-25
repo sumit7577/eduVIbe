@@ -13,28 +13,28 @@ const Hero = () => {
         <section className="overflow-hidden pb-20 pt-35 md:pt-40 xl:pb-25 xl:pt-46 bg-hero">
           <div className="mx-auto max-w-c-1390 px-4 md:px-8 2xl:px-0 ">
             <div className="md:grid md:grid-cols-2 sm:grid-rows-1 lg:items-center lg:gap-8 xl:gap-32.5">
-              <div className="ml-15">
+              <div className="md:ml-15">
                 <h4 className="mb-4.5 text-base font-bold uppercase text-primary tracking-wide font-sans">
                   {data[0].title}
                 </h4>
-                <h1 className="mb-5 text-7xl font-bold text-black dark:text-white font-sans">
+                <h1 className="mb-5 md:text-7xl text-4xl font-bold text-black dark:text-white font-sans">
                   {data[0].title2}
                 </h1>
-                <p className="text-lg font-medium font-sans border-l-2 p-2 border-primary">
+                <p className="md:text-lg text-md font-medium font-sans border-l-2 p-2 border-primary">
                   {data[0].description}
                 </p>
 
                 <Link
                   href="#"
-                  className="mt-10 flex items-center rounded-md bg-primary px-6 py-4 text- text-white duration-300 ease-in-out w-max font-semibold"
+                  className="mt-4 flex items-center rounded-md bg-primary px-6 py-4 text- text-white duration-300 ease-in-out w-max font-semibold"
                 >
                   Get Started Today
                   <HeroIcon iconName="ArrowRightIcon" className="h-4 w-4 mx-2" />
                 </Link>
               </div>
 
-              <div className="animate_right flex flex-col">
-                <div className="flex gap-5">
+              <div className="animate_right flex flex-col mt-5 md:mt-0">
+                <div className="md:flex gap-5">
                   <div className="rounded-md bg-white p-4 basis-1/2 max-h-fit shadow-md">
                     <a className="cursor-pointer flex justify-center overflow-hidden h-1/2" href="#">
                       <Image
@@ -42,7 +42,7 @@ const Hero = () => {
                         alt={data && data[0].featured_course.title}
                         width={250}
                         height={250}
-                        className="hover:scale-110 ease-in duration-300 h-full max-w-full"
+                        className="hover:scale-110 ease-in duration-300 h-full w-full"
                       />
                     </a>
 
@@ -91,7 +91,7 @@ const Hero = () => {
 
                 </div>
                 {data[0].meet_link &&
-                  <div className="rounded-md bg-white p-4 mt-4 basis-1/4 flex flex-col max-w-fit shadow-md px-6 relative left-30">
+                  <div className="order-first md:order-1 rounded-md bg-white p-4 mt-4 basis-1/4 flex flex-col max-w-fit shadow-md px-6 relative md:left-30 mb-4 md:mb-0">
                     <Image
                       src="/images/user/user-01.png"
                       alt="user"

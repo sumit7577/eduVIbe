@@ -30,7 +30,7 @@ const SingleCourse = ({ feature }: { feature: CourseRespType }) => {
         className="group animate_top z-40 rounded-lg border cursor-pointer border-white bg-white p-6 max-w-[24rem] shadow-solid-3 transition-all hover:shadow-solid-4 dark:border-strokedark dark:bg-blacksection dark:hover:bg-hoverdark"
       >
         <div className="relative flex h-[16rem] items-center justify-center rounded-[4px] group-hover:scale-120 ease-in duration-300">
-          <Image src={image ? image : "/images/blog/blog-02.png"} width={400} height={400} alt="course" className="h-full max-w-full object-cover" />
+          <Image src={image ? image : "/images/blog/blog-02.png"} width={400} height={400} alt="course" className="h-full w-full object-cover" />
           <div className="flex absolute top-2 justify-between w-full">
             <div className="flex gap-1 items-center bg-orange-600 p-1 px-2 rounded-sm">
               <HeroIcon iconName="ClockIcon" className="h-4 w-4 text-white" />

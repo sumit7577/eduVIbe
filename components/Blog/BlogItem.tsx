@@ -28,7 +28,7 @@ const BlogItem = ({ blog }: { blog: BlogRespType }) => {
         whileInView="visible"
         transition={{ duration: 1, delay: 0.5 }}
         viewport={{ once: true }}
-        className="animate_top rounded-lg bg-white p-6 pb-9 shadow-solid-8 dark:bg-blacksection max-w-[90%]"
+        className="animate_top rounded-lg bg-white p-6 pb-9 shadow-solid-8 dark:bg-blacksection"
       >
         <div className="px-4">
           <h3 className="mb-2 mt-2 line-clamp-2 inline-block text-md text-primary dark:text-white font-bold font-sans">
