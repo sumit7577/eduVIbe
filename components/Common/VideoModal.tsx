@@ -67,7 +67,7 @@ export default function VideoModal({
                         leaveTo="opacity-0 scale-95"
                     >
                         <div className="max-w-6xl mx-auto h-full flex items-center">
-                            <Dialog.Panel className="w-[100vh] h-[50%] bg-black overflow-hidden rounded-md shadow-lg">
+                            <Dialog.Panel className="w-[90vw] md:w-[100vh] h-[50%] bg-black overflow-hidden rounded-md shadow-lg">
                                 <div className='relative h-full'>
                                     <iframe src={`https://iframe.mediadelivery.net/embed/${video.videoLibraryId}/${video.guid}?autoplay=true&loop=false&muted=false&preload=true&responsive=true`} loading="lazy" className='border-none h-full w-full absolute' allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;" allowFullScreen={true}>
                                     </iframe>
