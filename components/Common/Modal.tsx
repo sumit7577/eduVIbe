@@ -9,7 +9,7 @@ interface ModalProps {
     description?: string
     open: boolean,
     setModal: Dispatch<SetStateAction<boolean>>,
-    onSuccess: () => void
+    onSuccess: () => void,
 }
 const Modal = (props: ModalProps) => {
     const { open, setModal, title, description, onSuccess } = props;

@@ -37,6 +37,12 @@ const getSingleCourse = async (id: number | string): Promise<SingleCourse> => {
     return data;
 }
 
+const completeCheckout = async(id:number| string):Promise<string> =>{
+    const response = await apiClient.get(`${BASE_URL}/checkout/${id}`);
+    const data = await response.data;
+    return data;
+}
+
 const getTestimonial = async (): Promise<Array<TestimonialRespType>> => {
     const response = await apiClient.get(`${BASE_URL}/testimonial/`);
     const data = await response.data;
@@ -87,5 +93,6 @@ const homeUser = async (): Promise<typeof userResponse> => {
 
 export {
     getHero, getAbout, getCategory, getCourse, getTestimonial,
-    getBlogs, getCore, getSingleCourse, loginUser, registerUser, homeUser
+    getBlogs, getCore, getSingleCourse, loginUser, registerUser, homeUser,
+    completeCheckout
 }

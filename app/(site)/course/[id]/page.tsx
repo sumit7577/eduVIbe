@@ -10,8 +10,13 @@ import { useSetTab } from "@/utils/hooks/common";
 import Image from "next/image";
 import VideoModal from "@/components/Common/VideoModal";
 import { useQuery } from "react-query";
-import { SingleCourse, getSingleCourse } from "@/networking/controller";
-import { useState } from "react";
+import { SingleCourse, completeCheckout, getSingleCourse } from "@/networking/controller";
+import { SetStateAction, useEffect, useState } from "react";
+import { BASE_URL } from "@/networking";
+import { useAuth } from "@/app/context/AuthContext";
+import { useRouter } from "next/navigation";
+import Modal from "@/components/Common/Modal";
+import PaymentModal from "@/components/Common/paymentModal";
 
 
 const tabSet = ["Overview", "Curriculum", "Instructor", "Reviews"] as const;
@@ -47,8 +52,27 @@ const IsPaidPage = (props: { data: SingleCourse }) => {
 
 const SingleCoursePage = (props: singleCourse) => {
   const { tab, setTab } = useSetTab<typeof tabSet[number]>(tabSet[0]);
+  const router = useRouter();
+  const { authState, isUserAuthenticated } = useAuth();
+  const [paymentModal, setPaymentModal] = useState<boolean>(false)
+  const [paymentUi,setPaymentUi] = useState<string>("")
   const id = props.params.id;
   const { data, isError, isLoading } = useQuery("singleCourse", () => getSingleCourse(id));
+  
+  useEffect(() => {
+  }, [authState.token])
+
+  const purchaseCourse = () => {
+    if (isUserAuthenticated()) {
+      setPaymentModal(() => true)
+      completeCheckout(id).then(data => {
+        setPaymentUi(data);
+      })
+    }
+    else {
+      router.push("auth/signin")
+    }
+  }
   if (data && data?.paid) {
     return <IsPaidPage data={data} />
   }
@@ -56,6 +80,7 @@ const SingleCoursePage = (props: singleCourse) => {
     <>
       {data && data.data.length > 0 ? <>
         <section className="pb-20 pt-35 lg:pb-25 lg:pt-45 xl:pb-30 xl:pt-50">
+          <PaymentModal src={paymentUi} setModal={setPaymentModal} open={paymentModal} />
           <div className="mx-auto max-w-full">
             <CategoryHeader headerInfo={{
               subtitle: data.data[0].title,
@@ -173,7 +198,7 @@ const SingleCoursePage = (props: singleCourse) => {
                     <h2 className="border border-primary bg-stroke rounded-md p-4 text-md font-bold font-sans text-primary">
                       Price: {parseInt(data.data[0].price.toString()).toLocaleString("en-US", { style: "currency", currency: "INR" })}
                     </h2>
-                    <h2 className="border-2 bg-primary text-white rounded-md p-4 text-md font-bold font-sans cursor-pointer hover:bg-strokedark">
+                    <h2 className="border-2 bg-primary text-white rounded-md p-4 text-md font-bold font-sans cursor-pointer hover:bg-strokedark" onClick={purchaseCourse}>
                       Buy Now
                     </h2>
                   </div>
