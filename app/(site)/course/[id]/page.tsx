@@ -70,7 +70,7 @@ const SingleCoursePage = (props: singleCourse) => {
       })
     }
     else {
-      router.push("auth/signin")
+      router.replace("/auth/signin")
     }
   }
   if (data && data?.paid) {
