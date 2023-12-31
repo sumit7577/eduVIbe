@@ -60,16 +60,9 @@ const Header = () => {
             <Image
               src="/images/logo/majoring.png"
               alt="logo"
-              width={50}
-              height={30}
-              className="hidden w-full dark:block"
-            />
-            <Image
-              src="/images/logo/majoring.png"
-              alt="logo"
-              width={50}
-              height={30}
-              className="w-full dark:hidden"
+              width={60}
+              height={50}
+              className="max-h-[60px] max-w-[60px]"
             />
           </a>
 
