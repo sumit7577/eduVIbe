@@ -1,5 +1,5 @@
 "use client";
-import { Blog } from "@/types/blog";
+
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
@@ -23,7 +23,7 @@ const BlogItem = ({ blog }: { blog: BlogRespType }) => {
             y: 0,
           },
         }}
-        href="#"
+        href={`/blog/${id}/`}
         initial="hidden"
         whileInView="visible"
         transition={{ duration: 1, delay: 0.5 }}
@@ -32,7 +32,7 @@ const BlogItem = ({ blog }: { blog: BlogRespType }) => {
       >
         <div className="px-4">
           <h3 className="mb-2 mt-2 line-clamp-2 inline-block text-md text-primary dark:text-white font-bold font-sans">
-            <Link href={`/blog/blog-details`}>
+            <Link href={`/blog/${id}/`}>
               {title}
             </Link>
           </h3>
@@ -52,7 +52,7 @@ const BlogItem = ({ blog }: { blog: BlogRespType }) => {
             </div>
           </div>
         </div>
-        <Link href={`/blog/`} className="relative block aspect-[368/239] overflow-hidden">
+        <Link href={`/blog/${id}/`} className="relative block aspect-[368/239] overflow-hidden">
           <Image src={image || "/images/hero/hero-light.svg"} alt={title} fill className="hover:scale-110 ease-in duration-300" />
         </Link>
       </motion.a>

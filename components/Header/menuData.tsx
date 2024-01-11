@@ -17,13 +17,13 @@ const menuData: Menu[] = [
     id: 2.1,
     title: "Courses",
     newTab: false,
-    path: "/#course",
+    path: "/course",
   },
   {
     id: 3,
     title: "Blog",
     newTab: false,
-    path:"/#blog"
+    path:"/blog"
   }
 ];
 

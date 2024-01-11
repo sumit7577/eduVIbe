@@ -72,7 +72,7 @@ export const userResponse = {
 }
 
 export type userResponseType = Omit<typeof userResponse, "image"> & {
-    "image":any
+    "image": any
 }
 
 const AboutUsResponse = {
@@ -164,7 +164,7 @@ const CategoryResponse = {
 type CategoryType = typeof CategoryResponse;
 export type CategoryRespType = {
     [key in keyof CategoryType]: CategoryType[key]["type"]
-}
+} & { "courses": Array<string> }
 
 
 const CourseResponse = {

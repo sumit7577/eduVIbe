@@ -8,7 +8,8 @@ import Contact from "@/components/Contact";
 import Blog from "@/components/Blog";
 import Testimonial from "@/components/Testimonial";
 import Integration from "@/components/Integration";
-import { useAuth } from "../context/AuthContext";
+import { Suspense } from "react";
+import Loader from "@/components/Core/loader";
 
 export const metadata: Metadata = {
   title: "Majoring Edutech",
@@ -19,15 +20,17 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <main>
-      <Hero />
-      <About />
-      <Categories />
-      <Courses />
-      <Testimonial />
-      <Teams/>
-      <Integration />
-      <Contact />
-      <Blog />
+      <Suspense fallback={<Loader />}>
+        <Hero />
+        <About />
+        <Categories />
+        <Courses />
+        <Testimonial />
+        <Teams />
+        <Integration />
+        <Contact />
+        <Blog />
+      </Suspense>
     </main>
   );
 }

@@ -217,7 +217,7 @@ const Signin = () => {
                 <button
                   disabled={validateData() ? false : true}
                   aria-label="login with email and password"
-                  className={`inline-flex items-center gap-2.5 rounded-full  px-6 py-3 font-medium ${validateData() ? "bg-black hover:bg-blackho dark:bg-btndark dark:hover:bg-blackho" : "bg-stroke"} text-white duration-300 ease-in-out`}
+                  className={`inline-flex items-center gap-2.5 rounded-full  px-6 py-3 font-medium ${validateData() ? "bg-black hover:bg-blackho dark:bg-btndark dark:hover:bg-blackho text-white" : "bg-stroke text-black"}  duration-300 ease-in-out`}
                 >
                   Log in
                   {loginMutation.isLoading ?

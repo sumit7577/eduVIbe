@@ -7,14 +7,11 @@ type HeroIconProps = {
   solid?: boolean;
   iconName: IconName;
   className?: string;
-};
+} & React.HtmlHTMLAttributes<SVGSVGElement>;
 
-export function HeroIcon({
-  solid,
-  iconName,
-  className
-}: HeroIconProps): JSX.Element {
+export function HeroIcon(props: HeroIconProps): JSX.Element {
+  const { solid, iconName, className } = props;
   const Icon = solid ? SolidIcons[iconName] : OutlineIcons[iconName];
 
-  return <Icon className={className ?? 'h-6 w-6'} />;
+  return <Icon className={className ?? 'h-6 w-6'} {...props} />;
 }

@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { CategoryRespType } from "@/networking/types";
 
 const SingleBrand = ({ brand }: { brand: CategoryRespType }) => {
-  const { image, header, title, description, id } = brand;
+  const { image, header, title, description, id,courses } = brand;
 
   return (
     <>
@@ -45,7 +45,7 @@ const SingleBrand = ({ brand }: { brand: CategoryRespType }) => {
         </div>
         <div className="flex items-center flex-col gap-2">
           <p className="text-md text-primary font-sans">
-            5 Courses
+            {courses.length} Courses
           </p>
           <h2 className="text-lg text-black font-semibold font-sans">
             {title}

@@ -1,9 +1,6 @@
 "use client";
 import React from "react";
 import SingleBrand from "./SingleBrand";
-import brandData from "./catData";
-import Link from "next/link";
-import { HeroIcon } from "../Icon";
 import { useQuery } from "react-query";
 import { getCategory } from "@/networking/controller";
 
@@ -28,14 +25,7 @@ const Brands = () => {
             ))}
           </div>
           <div className="flex flex-col items-center my-8">
-            <Link
-              href="#"
-              className="flex items-center justify-center rounded-md bg-primary p-4 px-6 text-lg text-white font-semibold font-sans my-3 max-w-1/3 hover:bg-black"
-            >
-              Creative Courses
-              <HeroIcon iconName="ArrowRightIcon" className="h-4 w-4 ml-1" solid />
-
-            </Link>
+         
           </div>
 
         </div>

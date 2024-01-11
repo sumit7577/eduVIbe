@@ -19,8 +19,16 @@ const getCategory = async (): Promise<Array<CategoryRespType>> => {
     return data;
 }
 
-const getCourse = async (): Promise<Array<CourseRespType>> => {
-    const response = await apiClient.get(`${BASE_URL}/course/`);
+interface CoursePaginateType {
+    count: number,
+    next: string | null,
+    previous: string | null,
+    results: Array<CourseRespType>
+}
+
+const getCourse = async (page: number, cat?: string | null): Promise<CoursePaginateType> => {
+    const url = typeof cat === "string" ? `/course/?page=${page}&cat=${cat}` : `/course/?page=${page}`;
+    const response = await apiClient.get(`${BASE_URL}${url}`);
     const data = await response.data;
     return data;
 }
@@ -37,7 +45,7 @@ const getSingleCourse = async (id: number | string): Promise<SingleCourse> => {
     return data;
 }
 
-const completeCheckout = async(id:number| string):Promise<string> =>{
+const completeCheckout = async (id: number | string): Promise<string> => {
     const response = await apiClient.get(`${BASE_URL}/checkout/${id}`);
     const data = await response.data;
     return data;
@@ -49,8 +57,14 @@ const getTestimonial = async (): Promise<Array<TestimonialRespType>> => {
     return data;
 }
 
-const getBlogs = async (): Promise<Array<BlogRespType>> => {
-    const response = await apiClient.get(`${BASE_URL}/blog/`);
+interface BlogPaginateType {
+    count: number,
+    next: string | null,
+    previous: string | null,
+    results: Array<BlogRespType>
+}
+const getBlogs = async (page = 1): Promise<BlogPaginateType> => {
+    const response = await apiClient.get(`${BASE_URL}/blog/?page=${page}`);
     const data = await response.data;
     return data;
 }

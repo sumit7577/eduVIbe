@@ -25,7 +25,7 @@ const Hero = () => {
                 </p>
 
                 <Link
-                  href="#"
+                  href="/course"
                   className="mt-4 flex items-center rounded-md bg-primary px-6 py-4 text- text-white duration-300 ease-in-out w-max font-semibold"
                 >
                   Get Started Today

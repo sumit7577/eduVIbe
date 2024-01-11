@@ -1,18 +1,18 @@
 "use client";
+
+
 import React from "react";
-import SectionHeader from "../Common/SectionHeader";
 import BlogItem from "./BlogItem";
-import BlogData from "./blogData";
 import { HeroIcon } from "../Icon";
 import Link from "next/link";
 import { useQuery } from "react-query";
 import { getBlogs } from "@/networking/controller";
 
 const Blog = () => {
-  const { data } = useQuery("blog", getBlogs);
+  const { data } = useQuery("blog", () => getBlogs(1));
   return (
     <>
-      {data && data.length > 0 ? <>
+      {data && data.results.length > 0 ? <>
         <section id="blog" className="py-20 lg:py-25 xl:py-30 bg-hero">
           <div className="mx-auto max-w-c-1315 px-4 md:px-8 xl:px-10">
             {/* <!-- Section Title Start --> */}
@@ -22,7 +22,7 @@ const Blog = () => {
                 <h2 className="text-black font-bold text-4xl dark:text-white font-sans">Trending on Our Blogs</h2>
               </div>
               <Link
-                href="#"
+                href="/blog"
                 className="flex items-center justify-center rounded-md bg-primary p-4 px-6 text-lg text-white font-semibold font-sans my-3 max-w-1/3 hover:bg-black mt-5 md:mt-0"
               >
                 Read More Blogs
@@ -35,7 +35,7 @@ const Blog = () => {
 
           <div className="mx-auto mt-15 max-w-c-1280 px-4 md:px-8 xl:mt-20 xl:px-0">
             <div className="grid grid-cols-1 gap-5 md:grid-cols-3 lg:grid-cols-3 xl:gap-2 items-center justify-center">
-              {data && data.map((blog, key) => (
+              {data && data.results.map((blog, key) => (
                 <BlogItem blog={blog} key={key} />
               ))}
             </div>

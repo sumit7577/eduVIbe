@@ -1,4 +1,6 @@
 "use client";
+
+
 import React from "react";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
@@ -14,6 +16,7 @@ import {
   QueryClientProvider,
 } from 'react-query'
 import "../globals.css";
+
 
 const inter = Inter({
   subsets: ['latin'],

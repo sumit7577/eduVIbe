@@ -207,7 +207,7 @@ const Signup = () => {
                 />
               </div>
 
-              <div className="mb-7.5 flex flex-col gap-7.5 lg:mb-12.5 lg:flex-row lg:justify-between lg:gap-14">
+              {data.role === "Instructor" && < div className="mb-7.5 flex flex-col gap-7.5 lg:mb-12.5 lg:flex-row lg:justify-between lg:gap-14">
                 <Input
                   name="about_us"
                   type='text'
@@ -230,6 +230,7 @@ const Signup = () => {
                   accept="image/*"
                 />
               </div>
+              }
 
               <div className="flex flex-wrap gap-10 md:justify-between xl:gap-15">
                 <div className="mb-4 flex items-center">
@@ -266,7 +267,7 @@ const Signup = () => {
                 <button
                   disabled={validateData() ? false : true}
                   aria-label="signup with email and password"
-                  className={`inline-flex items-center gap-2.5 rounded-full ${validateData() ? "bg-black hover:bg-blackho dark:bg-btndark dark:hover:bg-blackho" : "bg-stroke"} px-6 py-3 font-medium text-white duration-300 ease-in-out`}
+                  className={`inline-flex items-center gap-2.5 rounded-full ${validateData() ? "bg-black hover:bg-blackho dark:bg-btndark dark:hover:bg-blackho text-white" : "bg-stroke text-black"} px-6 py-3 font-medium duration-300 ease-in-out`}
                 >
                   Create Account
                   {registerMutation.isLoading ?
@@ -291,7 +292,7 @@ const Signup = () => {
             </form>
           </motion.div>
         </div>
-      </section>
+      </section >
       {/* <!-- ===== SignUp Form End ===== --> */}
     </>
   );
