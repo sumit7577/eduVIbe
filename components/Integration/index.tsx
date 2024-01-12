@@ -5,9 +5,14 @@ import SectionHeader from "../Common/SectionHeader";
 import { HeroIcon } from "../Icon";
 import { useQuery } from "react-query";
 import { getCore } from "@/networking/controller";
+import Loader from "../Core/loader";
 
 const Integration = () => {
   const { data, isLoading } = useQuery("core", getCore);
+  
+  if (!data && isLoading) {
+    return <Loader />
+  }
   return (
     <>
       {data && data.length > 0 ? <>

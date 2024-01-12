@@ -4,9 +4,13 @@ import { HeroIcon } from "../Icon";
 import Link from "next/link";
 import { useQuery } from "react-query";
 import { getHero } from "@/networking/controller";
+import Loader from "../Core/loader";
 
 const Hero = () => {
   const { data, isLoading, isError } = useQuery("hero", getHero)
+  if (!data && isLoading) {
+    return <Loader />
+  }
   return (
     <>
       {data && data.length > 0 ? <>

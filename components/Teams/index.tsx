@@ -5,9 +5,14 @@ import { TeamData } from "./teamData";
 import SingleTeam from "./singleTeam";
 import { useQuery } from "react-query";
 import { getCore } from "@/networking/controller";
+import Loader from "../Core/loader";
 
 const Teams = () => {
   const { data, isLoading } = useQuery("teams", getCore);
+  
+  if (!data && isLoading) {
+    return <Loader />
+  }
   return (
     <>
       {/* <!-- ===== Pricing Table Start ===== --> */}

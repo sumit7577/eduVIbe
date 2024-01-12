@@ -8,9 +8,14 @@ import Link from "next/link";
 import { HeroIcon } from "../Icon";
 import { useQuery } from "react-query";
 import { getCourse } from "@/networking/controller";
+import Loader from "../Core/loader";
 
 const Courses = () => {
-  const { data } = useQuery("course", () => getCourse(1))
+  const { data, isLoading } = useQuery("course", () => getCourse(1))
+  
+  if (!data && isLoading) {
+    return <Loader />
+  }
   return (
     <>
       {/* <!-- ===== Features Start ===== --> */}

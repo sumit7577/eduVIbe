@@ -7,9 +7,13 @@ import { HeroIcon } from "../Icon";
 import Link from "next/link";
 import { useQuery } from "react-query";
 import { getBlogs } from "@/networking/controller";
+import Loader from "../Core/loader";
 
 const Blog = () => {
-  const { data } = useQuery("blog", () => getBlogs(1));
+  const { data, isLoading } = useQuery("blog", () => getBlogs(1));
+  if (!data && isLoading) {
+    return <Loader />
+  }
   return (
     <>
       {data && data.results.length > 0 ? <>

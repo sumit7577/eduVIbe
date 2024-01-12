@@ -6,16 +6,20 @@ import { getBlogs } from "@/networking/controller";
 import { useState } from "react";
 import { useQuery } from "react-query";
 import Pagination from "@/components/Common/Pagination";
+import Loader from "@/components/Core/loader";
 
 
 const BlogPage = () => {
   const [page, setPage] = useState(1);
 
-  const { data } = useQuery({
+  const { data, isLoading } = useQuery({
     queryKey: ['blog', page],
     queryFn: () => getBlogs(page),
     keepPreviousData: true,
   });
+  if (!data && isLoading) {
+    return <Loader />
+  }
   return (
     <>
       {/* <!-- ===== Blog Grid Start ===== --> */}

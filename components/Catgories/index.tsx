@@ -3,9 +3,13 @@ import React from "react";
 import SingleBrand from "./SingleBrand";
 import { useQuery } from "react-query";
 import { getCategory } from "@/networking/controller";
+import Loader from "../Core/loader";
 
 const Brands = () => {
-  const { data, isLoading } = useQuery("categorie", getCategory)
+  const { data, isLoading } = useQuery("categorie", getCategory);
+  if (!data && isLoading) {
+    return <Loader />
+  }
   return (
     <>
       {/* <!-- ===== Clients Start ===== --> */}
@@ -25,7 +29,7 @@ const Brands = () => {
             ))}
           </div>
           <div className="flex flex-col items-center my-8">
-         
+
           </div>
 
         </div>

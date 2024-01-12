@@ -12,9 +12,13 @@ import SingleTestimonial from "./SingleTestimonial";
 import { testimonialData } from "./testimonialData";
 import { useQuery } from "react-query";
 import { getTestimonial } from "@/networking/controller";
+import Loader from "../Core/loader";
 
 const Testimonial = () => {
   const { data, isLoading } = useQuery("testimonial", getTestimonial)
+  if (!data && isLoading) {
+    return <Loader />
+  }
   return (
     <>
       {data && data.length > 0 ? <>

@@ -5,9 +5,13 @@ import Image from "next/image";
 import { HeroIcon } from "../Icon";
 import { useQuery } from "react-query";
 import { getAbout } from "@/networking/controller";
+import Loader from "../Core/loader";
 
 const About = () => {
   const { data, isLoading } = useQuery("about", getAbout);
+  if (!data && isLoading) {
+    return <Loader />
+  }
   return (
     <>
       {/* <!-- ===== About Start ===== --> */}

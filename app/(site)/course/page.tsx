@@ -8,6 +8,7 @@ import { useQuery } from "react-query";
 import Pagination from "@/components/Common/Pagination";
 import { useState } from "react";
 import Input from "@/components/Core/Input";
+import Loader from "@/components/Core/loader";
 
 
 
@@ -33,6 +34,10 @@ const AllCourse = () => {
         keepPreviousData: true,
         enabled: true,
     })
+    
+    if (!data && isLoading) {
+        return <Loader />
+    }
     return (
         <section className="pb-20 pt-35 lg:pb-25 xl:pb-30">
             <CategoryHeader headerInfo={{
