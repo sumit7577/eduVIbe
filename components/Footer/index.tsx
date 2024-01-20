@@ -47,7 +47,7 @@ const Footer = () => {
                 </a>
 
                 <p className="mb-10 mt-5 text-white font-semibold text-md font-sans">
-                  It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum.
+                  Imagine a world where learning is dynamic, accessible, and downright thrilling. Majoring envisions just that. We're crafting a cutting-edge platform where every student, armed with just an internet connection and any PC, can delve into coding and learning effortlessly. No more tech limitations—just a future where practical skills take the spotlight. Let's transform education into an exciting journey, accessible to all, and let Majoring be your guide!
                 </p>
 
                 <div className="flex">
@@ -159,114 +159,31 @@ const Footer = () => {
                         href="#"
                         className="mb-3 inline-block hover:text-primary"
                       >
-                        About Us
+                        Home
                       </a>
                     </li>
                     <li>
                       <a
-                        href="#"
+                        href="#about"
                         className="mb-3 inline-block hover:text-primary"
                       >
-                        Upcoming Events
+                        About
                       </a>
                     </li>
                     <li>
                       <a
-                        href="#"
+                        href="#course"
                         className="mb-3 inline-block hover:text-primary"
                       >
-                        Blogs & News
+                        Courses
                       </a>
                     </li>
                     <li>
                       <a
-                        href="#"
+                        href="#blog"
                         className="mb-3 inline-block hover:text-primary"
                       >
-                        FAQ Question
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        href="#"
-                        className="mb-3 inline-block hover:text-primary"
-                      >
-                        Testimonial
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        href="#"
-                        className="mb-3 inline-block hover:text-primary"
-                      >
-                        Privacy Policy
-                      </a>
-                    </li>
-                  </ul>
-                </motion.div>
-
-                <motion.div
-                  variants={{
-                    hidden: {
-                      opacity: 0,
-                      y: -20,
-                    },
-
-                    visible: {
-                      opacity: 1,
-                      y: 0,
-                    },
-                  }}
-                  initial="hidden"
-                  whileInView="visible"
-                  transition={{ duration: 1, delay: 0.1 }}
-                  viewport={{ once: true }}
-                  className="animate_top"
-                >
-                  <h4 className="mb-9 text-itemtitle2 font-medium text-white">
-                    Useful Links
-                  </h4>
-
-                  <ul>
-                    <li>
-                      <a
-                        href="#"
-                        className="mb-3 inline-block hover:text-primary"
-                      >
-                        Contact Us
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        href="#"
-                        className="mb-3 inline-block hover:text-primary"
-                      >
-                        Pricing Plan
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        href="#"
-                        className="mb-3 inline-block hover:text-primary"
-                      >
-                        Gallery
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        href="#"
-                        className="mb-3 inline-block hover:text-primary"
-                      >
-                        Instructor
-                      </a>
-                    </li>
-
-                    <li>
-                      <a
-                        href="#"
-                        className="mb-3 inline-block hover:text-primary"
-                      >
-                        Purchase Guide
+                        Blog
                       </a>
                     </li>
                   </ul>
@@ -296,26 +213,33 @@ const Footer = () => {
                   <ul>
                     <li>
                       <a
-                        href="#"
                         className="mb-3 inline-block hover:text-primary"
                       >
-                        275 Quadra Street Victoria Road, New York
+                        Rd Number 6, Nagarjuna Colony, Balaji Colony Phase 1,
                       </a>
                     </li>
                     <li>
                       <a
-                        href="#"
                         className="mb-3 inline-block hover:text-primary"
                       >
-                        +91 91191191191
+                        Hastinapuram, Hyderabad,Telangana 500070
                       </a>
                     </li>
                     <li>
                       <a
-                        href="#"
+                        href="tel:+917330637595"
                         className="mb-3 inline-block hover:text-primary"
                       >
-                        +91 9189182919
+                        +91 7330637595
+                      </a>
+                    </li>
+
+                    <li>
+                      <a
+                        href="tel:+917036023591"
+                        className="mb-3 inline-block hover:text-primary"
+                      >
+                        +91 7036023591
                       </a>
                     </li>
 
@@ -324,7 +248,7 @@ const Footer = () => {
                         href="#"
                         className="mb-3 inline-block hover:text-primary"
                       >
-                        youremailaddress@com
+                        majoring.learning@gmail.com
                       </a>
                     </li>
                   </ul>
@@ -355,7 +279,7 @@ const Footer = () => {
               className="animate_top"
             >
               <p>
-                &copy; {new Date().getFullYear()} EduVibe | Developed By DevsVibe. All Rights Reserved
+                &copy; {new Date().getFullYear()} Majoring Edutech. All Rights Reserved
               </p>
             </motion.div>
           </div>

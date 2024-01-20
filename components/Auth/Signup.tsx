@@ -93,7 +93,7 @@ const Signup = () => {
               Create an Account
             </h2>
 
-            <div className="flex items-center gap-8">
+            {/*<div className="flex items-center gap-8">
               <button
                 aria-label="signup with google"
                 className="text-body-color dark:text-body-color-dark dark:shadow-two mb-6 flex w-full items-center justify-center rounded-sm border border-stroke bg-[#f8f8f8] px-6 py-3 text-base outline-none transition-all duration-300 hover:border-primary hover:bg-primary/5 hover:text-primary dark:border-transparent dark:bg-[#2C303B] dark:hover:border-primary dark:hover:bg-primary/5 dark:hover:text-primary dark:hover:shadow-none"
@@ -152,6 +152,7 @@ const Signup = () => {
                 Signup with Github
               </button>
             </div>
+          */}
 
             <div className="mb-10 flex items-center justify-center">
               <span className="dark:bg-stroke-dark hidden h-[1px] w-full max-w-[200px] bg-stroke dark:bg-strokedark sm:block"></span>
@@ -239,7 +240,7 @@ const Signup = () => {
                     type="checkbox"
                     className="peer sr-only"
                   />
-                  <span className="border-gray-300 bg-gray-100 text-blue-600 dark:border-gray-600 dark:bg-gray-700 group mt-1 flex h-5 min-w-[20px] items-center justify-center rounded peer-checked:bg-primary">
+                  <span className="border-gray-300 bg-stroke text-blue-600 dark:border-gray-600 dark:bg-gray-700 group mt-1 flex h-5 min-w-[20px] items-center justify-center rounded peer-checked:bg-primary">
                     <svg
                       className="opacity-0 peer-checked:group-[]:opacity-100"
                       width="10"

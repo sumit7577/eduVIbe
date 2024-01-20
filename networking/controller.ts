@@ -19,7 +19,7 @@ const getCategory = async (): Promise<Array<CategoryRespType>> => {
     return data;
 }
 
-interface CoursePaginateType {
+export interface CoursePaginateType {
     count: number,
     next: string | null,
     previous: string | null,
@@ -28,6 +28,13 @@ interface CoursePaginateType {
 
 const getCourse = async (page: number, cat?: string | null): Promise<CoursePaginateType> => {
     const url = typeof cat === "string" ? `/course/?page=${page}&cat=${cat}` : `/course/?page=${page}`;
+    const response = await apiClient.get(`${BASE_URL}${url}`);
+    const data = await response.data;
+    return data;
+}
+
+const searchCourse = async (page: number, title: string): Promise<CoursePaginateType> => {
+    const url = `/search/course?page=${page}&name=${title}`
     const response = await apiClient.get(`${BASE_URL}${url}`);
     const data = await response.data;
     return data;
@@ -63,8 +70,16 @@ interface BlogPaginateType {
     previous: string | null,
     results: Array<BlogRespType>
 }
+
 const getBlogs = async (page = 1): Promise<BlogPaginateType> => {
     const response = await apiClient.get(`${BASE_URL}/blog/?page=${page}`);
+    const data = await response.data;
+    return data;
+}
+
+const searchBlogs = async (page: number, title: string): Promise<BlogPaginateType> => {
+    const url = `/search/blog?page=${page}&title=${title}`
+    const response = await apiClient.get(`${BASE_URL}${url}`);
     const data = await response.data;
     return data;
 }
@@ -108,5 +123,6 @@ const homeUser = async (): Promise<typeof userResponse> => {
 export {
     getHero, getAbout, getCategory, getCourse, getTestimonial,
     getBlogs, getCore, getSingleCourse, loginUser, registerUser, homeUser,
-    completeCheckout
+    completeCheckout,
+    searchCourse,searchBlogs
 }

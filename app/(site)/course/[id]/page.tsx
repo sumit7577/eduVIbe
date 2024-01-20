@@ -17,6 +17,7 @@ import { useAuth } from "@/app/context/AuthContext";
 import { useRouter } from "next/navigation";
 import Modal from "@/components/Common/Modal";
 import PaymentModal from "@/components/Common/paymentModal";
+import Loader from "@/components/Core/loader";
 
 
 const tabSet = ["Overview", "Curriculum", "Instructor", "Reviews"] as const;
@@ -55,10 +56,10 @@ const SingleCoursePage = (props: singleCourse) => {
   const router = useRouter();
   const { authState, isUserAuthenticated } = useAuth();
   const [paymentModal, setPaymentModal] = useState<boolean>(false)
-  const [paymentUi,setPaymentUi] = useState<string>("")
+  const [paymentUi, setPaymentUi] = useState<string>("")
   const id = props.params.id;
   const { data, isError, isLoading } = useQuery("singleCourse", () => getSingleCourse(id));
-  
+
   useEffect(() => {
   }, [authState.token])
 
@@ -73,7 +74,10 @@ const SingleCoursePage = (props: singleCourse) => {
       router.replace("/auth/signin")
     }
   }
-  if (data && data?.paid) {
+  if (!data && isLoading) {
+    return <Loader />
+  }
+  else if (data && data?.paid) {
     return <IsPaidPage data={data} />
   }
   return (
